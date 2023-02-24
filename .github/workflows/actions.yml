@@ -17,3 +17,4 @@ jobs:
       with:
         tag: "latest"
         message: "Latest release"
+        force_push_tag: true
