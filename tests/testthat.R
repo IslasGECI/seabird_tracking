@@ -1,3 +1,3 @@
 library(testthat)
-library(templater)
-test_check("templater")
+library(seabird.tracking)
+test_check("seabird.tracking")
