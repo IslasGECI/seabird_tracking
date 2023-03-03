@@ -10,8 +10,10 @@ Config/testthat/edition: 3
 Description: Repository to gls and gps tracking of seabirds
 Encoding: UTF-8
 Imports:
+    dplyr,
     R6,
-    tidyverse
+    rjson,
+    tidyverse,
 LazyData: true
 License: AGPL-3.0-or-later
 Roxygen: list(markdown = TRUE)
