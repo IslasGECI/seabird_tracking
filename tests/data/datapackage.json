@@ -641,11 +641,17 @@
                     },
                     {
                         "name": "breed_status",
-                        "type": "boolean",
+                        "type": "string",
                         "format": "default",
                         "nombre_largo": "Estado reproductivo",
                         "long_name": "Breed status",
-                        "description": "if the bird failed while it was being tracked then put this information in here."
+                        "description": "if the bird failed while it was being tracked then put this information in here.",
+                        "constraints": {
+                            "enum": [
+                                "Success",
+                                "Failure"
+                            ]
+                        }
                     },
                     {
                         "name": "nest_lat",
