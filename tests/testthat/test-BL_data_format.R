@@ -1,8 +1,50 @@
 library(tidyverse)
 
+
+datapackage_path <- "../data/datapackage.json"
+breeding_status_path <- "../data/breeding_status_albatross_guadalupe.csv"
+tracking_path <- "../data/gps-albatros-guadalupe.csv"
+
+describe("write_bl_table", {
+  it("construct_bl_table ", {
+    relative_path <- paste0(getwd(), "/../data/")
+    setwd(relative_path)
+    output_path <- "bl_albatross_guadalupe.csv"
+    datapackage_path <- "datapackage.json"
+    write_bl_table(datapackage_path, output_path)
+    expect_true(testtools::exist_output_file(output_path))
+  })
+})
+
+describe("Construct BL table", {
+  it("construct_bl_table ", {
+    obtained_bl_table <- construct_bl_table(breeding_status_path, tracking_path, datapackage_path)
+    expected_columns <- c(
+      "bird_id",
+      "track_id",
+      "original_track_id",
+      "sex",
+      "lat_colony",
+      "lon_colony",
+      "breed_stage",
+      "breed_status",
+      "date_gmt",
+      "time_gmt",
+      "longitude",
+      "latitude",
+      "argos_quality",
+      "common_name",
+      "site_name",
+      "colony_name",
+      "device"
+    )
+    obtained_columns <- colnames(obtained_bl_table)
+    expect_true(all(expected_columns %in% obtained_columns))
+  })
+})
 describe("Join data columns", {
-  breeding_status <- read_csv("../data/breeding_status_albatross_guadalupe.csv")
-  tracking_data <- read_csv("../data/gps-albatros-guadalupe.csv")
+  breeding_status <- read_csv(breeding_status_path, show_col_types = FALSE)
+  tracking_data <- read_csv(tracking_path, show_col_types = FALSE)
   obtained <- join_seabird_breeding_status_with_tracking_data(breeding_status, tracking_data)
   it("Check columns", {
     expected_columns <- c(
@@ -43,11 +85,9 @@ describe("Fill metadata data columns", {
       "colony_name",
       "device"
     )
-    datapackage_path <- "../data/datapackage.json"
     obtained_metadata <- get_metadata(datapackage_path)
     obtained_columns <- colnames(obtained_metadata)
     expect_equal(obtained_columns, expected_columns)
-    obtained_metadata <- obtained_metadata
     expected_metadata <- tibble(common_name = "Laysan albatross", site_name = "Mexico", colony_name = "Isla Guadalupe", device = "GPS")
     expect_equal(obtained_metadata, expected_metadata)
   })
@@ -58,5 +98,12 @@ describe("Fill metadata data columns", {
     obtained_site_name <- obtained$site_name[[1]]
     expected_site_name <- "USA"
     expect_equal(obtained_site_name, expected_site_name)
+  })
+  it("Test read metadata from gps-albatross", {
+    resource_name <- "gps-albatros-guadalupe"
+    obtained_metadata <- get_metadata_path(datapackage_path, resource_name = resource_name)
+    obtained_path <- obtained_metadata
+    expected_path <- "gps-albatros-guadalupe.csv"
+    expect_equal(obtained_path, expected_path)
   })
 })
