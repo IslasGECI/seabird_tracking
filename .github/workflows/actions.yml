@@ -3,15 +3,26 @@ on: push
 jobs:
   actions:
     runs-on: ubuntu-latest
+    env:
+      github_sha: ${{ github.sha }}
     steps:
     - name: Copia repositorio
       uses: actions/checkout@v3
     - name: Construye imagen
-      run: docker build --tag islasgeci .
+      run: docker build --tag islasgeci/seabird_tracking:latest --tag islasgeci/seabird_tracking:${github_sha:0:4} .
     - name: Verifica el formato
-      run: docker run islasgeci make check
+      run: docker run islasgeci/seabird_tracking make check
     - name: Corre pruebas y evalúa cobertura
-      run: docker run islasgeci make coverage
+      run: docker run islasgeci/seabird_tracking make coverage
+    - name: Docker log-in
+      env:
+        docker_username: ${{ secrets.docker_username }}
+        docker_password: ${{ secrets.docker_password }}
+      run: echo "${docker_password}" | docker login --username "${docker_username}" --password-stdin
+    - name: Upload image to Docker Hub
+      run: docker push islasgeci/seabird_tracking:latest
+    - name: Tag image with hash
+      run: docker push islasgeci/seabird_tracking:${github_sha:0:4}
     - name: Create/Update tag
       uses: rickstaa/action-create-tag@v1.5.4
       with:
