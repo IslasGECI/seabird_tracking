@@ -1,4 +1,5 @@
 #' @import dplyr
+#' @import readr
 
 #' @export
 write_bl_table <- function(datapackage_path = "datapackage.json", output_path = "bl_gps_albatross_guadalupe.csv") {

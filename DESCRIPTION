@@ -12,6 +12,7 @@ Encoding: UTF-8
 Imports:
     dplyr,
     R6,
+    readr,
     rjson,
     tidyverse,
 LazyData: true
