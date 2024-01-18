@@ -32,7 +32,13 @@ format:
       -e "style_dir('tests')" \
       -e "style_dir('tests/testthat')"
 
-init: setup tests
+init: setup init_github tests
+
+init_github:
+	git config --global --add safe.directory /workdir
+	git config --global user.name "Ciencia de Datos • GECI"
+	git config --global user.email "ciencia.datos@islas.org.mx"
+
 
 setup: clean install
 
@@ -44,3 +50,21 @@ install:
 
 tests:
 	Rscript -e "devtools::test(stop_on_failure = TRUE)"
+
+red: format
+	Rscript -e "devtools::test(stop_on_failure = TRUE)" \
+	&& git  restore tests/testthat/*.R \
+	|| (git add tests/testthat/*.R && git commit -m "🛑🧪 Fail tests")
+	chmod g+w -R .
+
+green: format
+	Rscript -e "devtools::test(stop_on_failure = TRUE)" \
+	&& (git add R/*.R && git commit -m "✅ Pass tests") \
+	|| git  restore R/*.R
+	chmod g+w -R .
+
+refactor: format
+	Rscript -e "devtools::test(stop_on_failure = TRUE)" \
+	&& (git add R/*.R tests/testthat/*.R && git commit -m "♻️  Refactor") \
+	|| git  restore R/*.R tests/testthat/*.R
+	chmod g+w -R .
