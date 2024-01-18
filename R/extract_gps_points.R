@@ -1,7 +1,9 @@
 #' @export
 clean_gps_from_txt <- function(raw_path, bird_id, output_path) {
   extracted_points <- extract_points(raw_path)
-  points_with_id <- extracted_points |> dplyr::mutate(bird_id = bird_id)
+  points_with_id <- extracted_points |>
+    dplyr::mutate(bird_id = bird_id) |>
+    dplyr::mutate(Date = lubridate::dmy(Date))
   readr::write_csv(points_with_id, output_path)
 }
 
