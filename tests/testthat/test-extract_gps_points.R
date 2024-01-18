@@ -7,6 +7,9 @@ describe("extract gps for each file", {
     obtained <- read_csv(output_path, show_col_types = FALSE)
     obtained_id <- obtained$bird_id[[1]]
     expect_equal(obtained_id, bird_id)
+    obtained_date <- obtained$Date[[1]]
+    expected_date <- "2014-01-25"
+    expect_equal(obtained_date, expected_date)
     expect_true(testtools::exist_output_file(output_path))
   })
   it("read tsv", {
