@@ -3,10 +3,11 @@ describe("extract gps for each file", {
   it("clean txt for each bird id", {
     bird_id <- "bird_1"
     output_path <- "/workdir/tests/data/cleaned_gps.csv"
-    obtained <- clean_gps_from_txt(raw_path, bird_id, output_path)
+    clean_gps_from_txt(raw_path, bird_id, output_path)
+    obtained <- read_csv(output_path, show_col_types = FALSE)
     obtained_id <- obtained$bird_id[[1]]
     expect_equal(obtained_id, bird_id)
-    expect_equal(testtools::exists_output_file(output_path))
+    expect_true(testtools::exist_output_file(output_path))
   })
   it("read tsv", {
     obtained_points <- extract_points(raw_path)
