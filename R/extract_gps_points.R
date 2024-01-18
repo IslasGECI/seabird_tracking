@@ -1,6 +1,7 @@
 extract_points <- function(raw_path) {
-  raw <- readr::read_tsv(raw_path, skip = 15, col_names = c("Date", "Time", "Longitude", "Latitude")) |>
-    dplyr::select(c("Date", "Time", "Longitude", "Latitude"))
+  columns_of_interest <- c("Date", "Time", "Longitude", "Latitude")
+  raw <- readr::read_tsv(raw_path, skip = 15, col_names = columns_of_interest, show_col_types = FALSE) |>
+    dplyr::select(columns_of_interest)
   clean_rows <- subset(raw, !stringr::str_detect(Date, "^EVENT"))
   return(clean_rows)
 }

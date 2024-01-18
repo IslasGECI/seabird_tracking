@@ -7,7 +7,7 @@ describe("extract gps for each file", {
     expect_equal(obtained_number_of_columns, expected_number_of_columns)
 
     obtained_number_of_rows <- nrow(obtained_points)
-    expected_number_of_rows <- 15
+    expected_number_of_rows <- 16
     expect_equal(obtained_number_of_rows, expected_number_of_rows)
   })
 })
