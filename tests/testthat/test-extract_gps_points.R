@@ -1,6 +1,12 @@
 describe("extract gps for each file", {
+  raw_path <- "/workdir/tests/data/raw_gps_albatros.txt"
+  it("clean txt for each bird id", {
+    bird_id <- "bird_1"
+    obtained <- clean_gps_from_txt(raw_path, bird_id)
+    obtained_id <- obtained$bird_id[[1]]
+    expect_equal(obtained_id, bird_id)
+  })
   it("read tsv", {
-    raw_path <- "/workdir/tests/data/raw_gps_albatros.txt"
     obtained_points <- extract_points(raw_path)
     obtained_number_of_columns <- ncol(obtained_points)
     expected_number_of_columns <- 4
