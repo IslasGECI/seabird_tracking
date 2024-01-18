@@ -1,3 +1,4 @@
+#' @export
 clean_gps_from_txt <- function(raw_path, bird_id) {
   extracted_points <- extract_points(raw_path)
   extracted_points |> dplyr::mutate(bird_id = bird_id)
