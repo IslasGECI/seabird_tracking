@@ -1,3 +1,8 @@
+clean_gps <- function(raw_path, bird_id) {
+
+}
+
+
 #' @export
 clean_gps_from_txt <- function(raw_path, bird_id, output_path) {
   extracted_points <- extract_points_from_txt(raw_path)
