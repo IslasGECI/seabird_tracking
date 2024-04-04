@@ -31,5 +31,9 @@ describe("extract gps from i-gatU device", {
     obtained_columns <- colnames(obtained_points)
     expected_columns <- c("Date", "Time", "Longitude", "Latitude")
     expect_equal(obtained_columns, expected_columns)
+
+    obtained_date <- obtained$Date[[1]]
+    expected_date <- as.Date("2017-02-15")
+    expect_equal(obtained_date, expected_date)
   })
 })
