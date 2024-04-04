@@ -23,3 +23,10 @@ describe("extract gps for each file", {
     expect_equal(obtained_number_of_rows, expected_number_of_rows)
   })
 })
+
+describe("extract gps from i-gatU device", {
+  raw_path <- "/workdir/tests/data/raw_gps_albatros_igatu.csv"
+  it("read csv", {
+    obtained_points <- extract_points_from_csv(raw_path)
+  })
+})
