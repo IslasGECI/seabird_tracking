@@ -2,10 +2,11 @@ clean_gps <- function(raw_path, bird_id) {
   output_path <- glue::glue("/workdir/tests/data/{bird_id}.csv")
   file_extension <- stringr::str_sub(raw_path, -3)
   clean_method <- list(
-    "txt" = clean_gps_from_txt,
-    "csv" = clean_gps_from_csv
+    "txt" = xxclean_gps_from_txt,
+    "csv" = xxclean_gps_from_csv
   )
-  clean_method[[file_extension]](raw_path, bird_id, output_path)
+  points_with_id <- clean_method[[file_extension]](raw_path, bird_id)
+  readr::write_csv(points_with_id, output_path)
 }
 
 
