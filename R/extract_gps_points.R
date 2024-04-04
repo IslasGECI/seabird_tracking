@@ -7,6 +7,10 @@ clean_gps_from_txt <- function(raw_path, bird_id, output_path) {
   readr::write_csv(points_with_id, output_path)
 }
 
+clean_gps_from_csv <- function(raw_path, bird_id, output_path) {
+
+}
+
 extract_points_from_txt <- function(raw_path) {
   temporal_file <- "tmp.txt"
   command <- glue::glue("cat {raw_path} | grep --invert-match 'EVENT' > {temporal_file}")
