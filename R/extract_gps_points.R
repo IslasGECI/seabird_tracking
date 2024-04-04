@@ -18,5 +18,8 @@ extract_points_from_txt <- function(raw_path) {
 }
 
 extract_points_from_csv <- function(raw_path) {
-
+  raw <- readr::read_csv(raw_path, show_col_types = FALSE)
+  columns_of_interest <- c("Date", "Time", "Longitude", "Latitude")
+  raw |>
+    dplyr::select(dplyr::all_of(columns_of_interest))
 }
