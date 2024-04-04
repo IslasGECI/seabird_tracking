@@ -29,10 +29,12 @@ describe("extract gps from i-gatU device", {
   it("clean csv for each bird id", {
     bird_id <- "bird_1"
     output_path <- "/workdir/tests/data/cleaned_gps_from_igatu.csv"
+    testtools::delete_output_file(output_path)
     clean_gps_from_csv(raw_path, bird_id, output_path)
     obtained <- read_csv(output_path, show_col_types = FALSE)
-    obtained_id <- obtained$bird_id[[-1]]
+    obtained_id <- last(obtained$bird_id)
     expect_equal(obtained_id, bird_id)
+    testtools::delete_output_file(output_path)
   })
   it("read csv", {
     obtained_points <- extract_points_from_csv(raw_path)
