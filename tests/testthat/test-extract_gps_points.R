@@ -30,6 +30,9 @@ describe("extract gps from i-gatU device", {
     bird_id <- "bird_1"
     output_path <- "/workdir/tests/data/cleaned_gps_from_igatu.csv"
     clean_gps_from_csv(raw_path, bird_id, output_path)
+    obtained <- read_csv(output_path, show_col_types = FALSE)
+    obtained_id <- obtained$bird_id[[-1]]
+    expect_equal(obtained_id, bird_id)
   })
   it("read csv", {
     obtained_points <- extract_points_from_csv(raw_path)
