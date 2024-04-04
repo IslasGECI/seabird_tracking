@@ -15,6 +15,15 @@ describe("extract gps for each file", {
     expect_true(testtools::exist_output_file(output_path))
     testtools::delete_output_file(output_path)
   })
+  it("clean gps from txt", {
+    raw_path <- "/workdir/tests/data/raw_gps_albatros_igatu.csv"
+    bird_id <- "bird_1"
+    clean_gps(raw_path, bird_id)
+
+    output_path <- "/workdir/tests/data/bird_1.csv"
+    expect_true(testtools::exist_output_file(output_path))
+    testtools::delete_output_file(output_path)
+  })
 })
 describe("extract gps technosmart", {
   raw_path <- "/workdir/tests/data/raw_gps_albatros.txt"
