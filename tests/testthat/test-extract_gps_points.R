@@ -18,6 +18,7 @@ describe("extract gps technosmart", {
     expected_date <- as.Date("2014-01-25")
     expect_equal(obtained_date, expected_date)
     expect_true(testtools::exist_output_file(output_path))
+    testtools::delete_output_file(output_path)
   })
   it("read tsv", {
     obtained_points <- extract_points_from_txt(raw_path)
