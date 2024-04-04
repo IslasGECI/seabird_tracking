@@ -1,5 +1,12 @@
 describe("extract gps for each file", {
   raw_path <- "/workdir/tests/data/raw_gps_albatros.txt"
+  it("clean gps", {
+    bird_id <- "bird_1"
+    clean_gps(raw_path, bird_id)
+  })
+})
+describe("extract gps technosmart", {
+  raw_path <- "/workdir/tests/data/raw_gps_albatros.txt"
   it("clean txt for each bird id", {
     bird_id <- "bird_1"
     output_path <- "/workdir/tests/data/cleaned_gps.csv"
