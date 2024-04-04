@@ -28,11 +28,12 @@ describe("extract gps from i-gatU device", {
   raw_path <- "/workdir/tests/data/raw_gps_albatros_igatu.csv"
   it("read csv", {
     obtained_points <- extract_points_from_csv(raw_path)
+    print(obtained_points)
     obtained_columns <- colnames(obtained_points)
     expected_columns <- c("Date", "Time", "Longitude", "Latitude")
     expect_equal(obtained_columns, expected_columns)
 
-    obtained_date <- obtained$Date[[1]]
+    obtained_date <- obtained_points$Date[[1]]
     expected_date <- as.Date("2017-02-15")
     expect_equal(obtained_date, expected_date)
   })
