@@ -7,15 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.1.0] - 2024-01-18
+## [1.0.0] - 2024-04-04
 
 ### Added
+- CLI function `clean_gps()` read csv and txt files
 
 ### Fixed
 
 ### Changed
 
 ### Removed
+- `clean_gps_from_txt()` deprecated. Use `clean_gps()` with `.txt` file instead.
 
-[unreleased]: https://github.com/IslasGECI/templater/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/IslasGECI/templater/releases/tag/v0.1.0
+[unreleased]: https://github.com/IslasGECI/templater/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/IslasGECI/templater/releases/tag/v1.0.0

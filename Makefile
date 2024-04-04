@@ -45,8 +45,8 @@ setup: clean install
 install:
 	R -e "devtools::document()" && \
     R CMD build . && \
-    R CMD check seabird.tracking_0.1.0.tar.gz && \
-    R CMD INSTALL seabird.tracking_0.1.0.tar.gz
+    R CMD check seabird.tracking_1.0.0.tar.gz && \
+    R CMD INSTALL seabird.tracking_1.0.0.tar.gz
 
 tests:
 	Rscript -e "devtools::test(stop_on_failure = TRUE)"
