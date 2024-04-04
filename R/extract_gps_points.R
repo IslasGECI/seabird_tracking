@@ -1,3 +1,4 @@
+#' @export
 clean_gps <- function(raw_path, bird_id) {
   working_directory <- dirname(raw_path)
   output_path <- glue::glue("{working_directory}/{bird_id}.csv")
