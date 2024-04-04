@@ -28,5 +28,8 @@ describe("extract gps from i-gatU device", {
   raw_path <- "/workdir/tests/data/raw_gps_albatros_igatu.csv"
   it("read csv", {
     obtained_points <- extract_points_from_csv(raw_path)
+    obtained_columns <- colnames(obtained_points)
+    expected_columns <- c("Date", "Time", "Longitude", "Latitude")
+    expect_equal(obtained_columns, expected_columns)
   })
 })
