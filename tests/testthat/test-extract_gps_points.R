@@ -30,10 +30,16 @@ describe("extract gps from i-gatU device", {
     bird_id <- "bird_1"
     output_path <- "/workdir/tests/data/cleaned_gps_from_igatu.csv"
     testtools::delete_output_file(output_path)
+
     clean_gps_from_csv(raw_path, bird_id, output_path)
     obtained <- read_csv(output_path, show_col_types = FALSE)
     obtained_id <- last(obtained$bird_id)
     expect_equal(obtained_id, bird_id)
+
+    obtained_date <- obtained$Date[[1]]
+    expected_date <- as.Date("2017-02-15")
+    expect_equal(obtained_date, expected_date)
+
     testtools::delete_output_file(output_path)
   })
   it("read csv", {
@@ -41,9 +47,5 @@ describe("extract gps from i-gatU device", {
     obtained_columns <- colnames(obtained_points)
     expected_columns <- c("Date", "Time", "Longitude", "Latitude")
     expect_equal(obtained_columns, expected_columns)
-
-    obtained_date <- obtained_points$Date[[1]]
-    expected_date <- as.Date("2017-02-15")
-    expect_equal(obtained_date, expected_date)
   })
 })
