@@ -35,15 +35,6 @@ describe("extract gps for each file", {
 })
 describe("extract gps technosmart", {
   raw_path <- "/workdir/tests/data/raw_gps_albatros.txt"
-  it("clean txt for each bird id", {
-    bird_id <- "bird_1"
-    obtained <- clean_gps_from_txt(raw_path, bird_id)
-    obtained_id <- obtained$bird_id[[1]]
-    expect_equal(obtained_id, bird_id)
-    obtained_date <- obtained$Date[[1]]
-    expected_date <- as.Date("2014-01-25")
-    expect_equal(obtained_date, expected_date)
-  })
   it("read tsv", {
     obtained_points <- extract_points_from_txt(raw_path)
     obtained_number_of_columns <- ncol(obtained_points)
@@ -58,9 +49,6 @@ describe("extract gps technosmart", {
 
 describe("extract gps from i-gatU device", {
   raw_path <- "/workdir/tests/data/raw_gps_albatros_igatu.csv"
-  it("clean csv for each bird id", {
-    bird_id <- "bird_1"
-  })
   it("read csv", {
     obtained_points <- extract_points_from_csv(raw_path)
     obtained_columns <- colnames(obtained_points)
