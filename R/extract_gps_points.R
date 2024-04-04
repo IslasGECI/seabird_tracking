@@ -16,3 +16,7 @@ extract_points_from_txt <- function(raw_path) {
     dplyr::select(dplyr::all_of(columns_of_interest))
   return(raw)
 }
+
+extract_points_from_csv <- function(raw_path) {
+
+}
