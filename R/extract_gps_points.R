@@ -2,33 +2,21 @@ clean_gps <- function(raw_path, bird_id) {
   output_path <- glue::glue("/workdir/tests/data/{bird_id}.csv")
   file_extension <- stringr::str_sub(raw_path, -3)
   clean_method <- list(
-    "txt" = xxclean_gps_from_txt,
-    "csv" = xxclean_gps_from_csv
+    "txt" = clean_gps_from_txt,
+    "csv" = clean_gps_from_csv
   )
   points_with_id <- clean_method[[file_extension]](raw_path, bird_id)
   readr::write_csv(points_with_id, output_path)
 }
 
 
-#' @export
-clean_gps_from_txt <- function(raw_path, bird_id, output_path) {
-  points_with_id <- xxclean_gps_from_txt(raw_path, bird_id)
-  readr::write_csv(points_with_id, output_path)
-}
-
-xxclean_gps_from_txt <- function(raw_path, bird_id) {
+clean_gps_from_txt <- function(raw_path, bird_id) {
   extracted_points <- extract_points_from_txt(raw_path)
   add_bird_id(extracted_points, bird_id)
 }
 
 
-#' @export
-clean_gps_from_csv <- function(raw_path, bird_id, output_path) {
-  points_with_id <- xxclean_gps_from_csv(raw_path, bird_id)
-  readr::write_csv(points_with_id, output_path)
-}
-
-xxclean_gps_from_csv <- function(raw_path, bird_id) {
+clean_gps_from_csv <- function(raw_path, bird_id) {
   extracted_points <- extract_points_from_csv(raw_path)
   add_bird_id(extracted_points, bird_id)
 }

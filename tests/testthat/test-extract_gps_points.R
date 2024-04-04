@@ -29,7 +29,7 @@ describe("extract gps technosmart", {
   raw_path <- "/workdir/tests/data/raw_gps_albatros.txt"
   it("clean txt for each bird id", {
     bird_id <- "bird_1"
-    obtained <- xxclean_gps_from_txt(raw_path, bird_id)
+    obtained <- clean_gps_from_txt(raw_path, bird_id)
     obtained_id <- obtained$bird_id[[1]]
     expect_equal(obtained_id, bird_id)
     obtained_date <- obtained$Date[[1]]
@@ -53,7 +53,7 @@ describe("extract gps from i-gatU device", {
   it("clean csv for each bird id", {
     bird_id <- "bird_1"
 
-    obtained <- xxclean_gps_from_csv(raw_path, bird_id)
+    obtained <- clean_gps_from_csv(raw_path, bird_id)
     obtained_id <- last(obtained$bird_id)
     expect_equal(obtained_id, bird_id)
 
