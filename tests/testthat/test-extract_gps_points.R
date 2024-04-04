@@ -13,7 +13,7 @@ describe("extract gps for each file", {
     expect_true(testtools::exist_output_file(output_path))
   })
   it("read tsv", {
-    obtained_points <- extract_points(raw_path)
+    obtained_points <- extract_points_from_txt(raw_path)
     obtained_number_of_columns <- ncol(obtained_points)
     expected_number_of_columns <- 4
     expect_equal(obtained_number_of_columns, expected_number_of_columns)
