@@ -1,5 +1,6 @@
 clean_gps <- function(raw_path, bird_id) {
-
+  output_path <- glue::glue("/workdir/tests/data/{bird_id}.csv")
+  clean_gps_from_txt(raw_path, bird_id, output_path)
 }
 
 
