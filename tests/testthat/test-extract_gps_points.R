@@ -52,10 +52,8 @@ describe("extract gps from i-gatU device", {
   raw_path <- "/workdir/tests/data/raw_gps_albatros_igatu.csv"
   it("clean csv for each bird id", {
     bird_id <- "bird_1"
-    output_path <- "/workdir/tests/data/cleaned_gps_from_igatu.csv"
-    testtools::delete_output_file(output_path)
 
-    obtained <- clean_gps_from_csv(raw_path, bird_id, output_path)
+    obtained <- xxclean_gps_from_csv(raw_path, bird_id)
     obtained_id <- last(obtained$bird_id)
     expect_equal(obtained_id, bird_id)
 
