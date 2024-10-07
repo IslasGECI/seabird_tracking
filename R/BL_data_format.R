@@ -11,14 +11,15 @@ write_bl_table <- function(datapackage_path = "datapackage.json", output_path = 
 
 construct_bl_table <- function(breeding_status_path, tracking_path, datapackage_path) {
   breeding_status <- read_csv(breeding_status_path, show_col_types = FALSE)
-  tracking <- read_csv(tracking_path, show_col_types = FALSE)
+  tracking <- read_csv(tracking_path, show_col_types = FALSE) |>
+    mutate(season = lubridate::year(date))
   data_table <- join_seabird_breeding_status_with_tracking_data(breeding_status, tracking)
   metadata <- get_metadata(datapackage_path)
   data_table %>% mutate(metadata)
 }
 
 join_seabird_breeding_status_with_tracking_data <- function(breeding_status, tracking_data) {
-  right_join(breeding_status, tracking_data, by = c("bird_id" = "name"), multiple = "all") |>
+  right_join(breeding_status, tracking_data, by = join_by("bird_id" == "name", "season" == "season")) |>
     rename(date_gmt = date, lat_colony = nest_lat, lon_colony = nest_lon) |>
     mutate(track_id = bird_id, original_track_id = bird_id, time_gmt = NA, argos_quality = NA)
 }
