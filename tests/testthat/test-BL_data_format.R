@@ -45,7 +45,6 @@ describe("Construct BL table", {
 describe("Join data columns", {
   breeding_status <- read_csv(breeding_status_path, show_col_types = FALSE)
   tracking_data <- read_csv(tracking_path, show_col_types = FALSE)
-  print(tracking_data)
   obtained <- join_seabird_breeding_status_with_tracking_data(breeding_status, tracking_data)
   it("Check columns", {
     expected_columns <- c(
