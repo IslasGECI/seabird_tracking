@@ -74,8 +74,11 @@ describe("Join data columns", {
     expected_rows_LAAL01 <- 3
     expect_equal(obtained_rows_LAAL01, expected_rows_LAAL01)
     obtained_rows <- nrow(obtained)
-    expected_rows <- 29
+    expected_rows <- 33
     expect_equal(obtained_rows, expected_rows)
+    obtained_rows_LAAL06 <- nrow(filter(obtained, bird_id == "LAAL06"))
+    expected_rows_LAAL06 <- 0
+    expect_equal(obtained_rows_LAAL06, expected_rows_LAAL06)
   })
 })
 describe("Fill metadata data columns", {
