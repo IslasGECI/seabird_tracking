@@ -11,6 +11,7 @@ describe("write_bl_table", {
     setwd(relative_path)
     output_path <- "bl_albatross_guadalupe.csv"
     datapackage_path <- "datapackage.json"
+    testtools::if_exist_remove(output_path)
     write_bl_table(datapackage_path, output_path)
     expect_true(testtools::exist_output_file(output_path))
   })
@@ -44,7 +45,8 @@ describe("Construct BL table", {
 })
 describe("Join data columns", {
   breeding_status <- read_csv(breeding_status_path, show_col_types = FALSE)
-  tracking_data <- read_csv(tracking_path, show_col_types = FALSE)
+  tracking_data <- read_csv(tracking_path, show_col_types = FALSE) |>
+    mutate(season = lubridate::year(date))
   obtained <- join_seabird_breeding_status_with_tracking_data(breeding_status, tracking_data)
   it("Check columns", {
     expected_columns <- c(

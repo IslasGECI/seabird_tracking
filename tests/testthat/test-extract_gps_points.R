@@ -13,7 +13,7 @@ describe("extract gps for each file", {
     expected_date <- as.Date("2014-01-25")
     expect_equal(obtained_date, expected_date)
     expect_true(testtools::exist_output_file(output_path))
-    testtools::delete_output_file(output_path)
+    testtools::if_exist_remove(output_path)
   })
   it("clean gps from txt", {
     raw_path <- "/workdir/tests/data/raw_gps_albatros_igatu.csv"
@@ -30,7 +30,7 @@ describe("extract gps for each file", {
     expect_equal(obtained_date, expected_date)
     output_path <- "/workdir/tests/data/bird_1.csv"
     expect_true(testtools::exist_output_file(output_path))
-    testtools::delete_output_file(output_path)
+    testtools::if_exist_remove(output_path)
   })
 })
 describe("extract gps technosmart", {
