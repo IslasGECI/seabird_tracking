@@ -12,10 +12,24 @@ write_bl_table <- function(datapackage_path = "datapackage.json", output_path = 
 construct_bl_table <- function(breeding_status_path, tracking_path, datapackage_path) {
   breeding_status <- read_csv(breeding_status_path, show_col_types = FALSE)
   tracking <- read_csv(tracking_path, show_col_types = FALSE) |>
-    mutate(season = lubridate::year(date))
+    mutate(season = lubridate::year(date), age = "adult", equinox = NA)
   data_table <- join_seabird_breeding_status_with_tracking_data(breeding_status, tracking)
-  metadata <- get_metadata(datapackage_path)
-  data_table %>% mutate(metadata)
+  ordered_columns <- c(
+    "bird_id",
+    "sex",
+    "age",
+    "breed_stage",
+    "track_id",
+    "date_gmt",
+    "time_gmt",
+    "latitude",
+    "longitude",
+    "original_track_id",
+    "equinox",
+    "argos_quality"
+  )
+  data_table |>
+    select(ordered_columns)
 }
 
 join_seabird_breeding_status_with_tracking_data <- function(breeding_status, tracking_data) {
