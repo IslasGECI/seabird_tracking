@@ -21,7 +21,7 @@ construct_bl_table <- function(breeding_status_path, tracking_path, datapackage_
     "argos_quality"
   )
   data_table |>
-    select(ordered_columns)
+    select(all_of(ordered_columns))
 }
 
 join_seabird_breeding_status_with_tracking_data <- function(breeding_status, tracking_data) {
