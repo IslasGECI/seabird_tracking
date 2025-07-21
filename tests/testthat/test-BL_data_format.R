@@ -66,6 +66,19 @@ describe("Join data columns", {
     expect_equal(obtained_rows_LAAL06, expected_rows_LAAL06)
   })
 })
+describe("Classify breed stage from hatching and brood dates", {
+  data <- tibble::tibble(
+    bird_id = c("LAAL1", "LAAL1", "LAAL1"),
+    hatching_end_date = c("2017-01-17", "2017-01-17", "2017-01-17"),
+    brood_end_date = c("2017-02-13", "2017-02-13", "2017-02-13"),
+    date_gmt = c("2017-01-15", "2017-02-01", "2017-02-20")
+  )
+  it("Classify incubation", {
+    obtained <- classify_breed_stage(data)
+    obtained_breed_stage <- obtained[[1, "breed_stage"]]
+    expect_equal(obtained_breed_stage, "incubation")
+  })
+})
 describe("Fill metadata data columns", {
   it("Check columns", {
     expected_columns <- c(
