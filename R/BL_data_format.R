@@ -33,7 +33,7 @@ classify_breed_stage <- function(data) {
   data |>
     mutate(breed_stage = case_when(
       date_gmt < hatching_end_date ~ "incubation",
-      date_gmt < brood_end_date & date_gmt > hatching_end_date ~ "brood-guard",
+      date_gmt < brood_end_date & date_gmt >= hatching_end_date ~ "brood-guard",
       date_gmt > brood_end_date ~ "chick-rearing"
     ))
 }
