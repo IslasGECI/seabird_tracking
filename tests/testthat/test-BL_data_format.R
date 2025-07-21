@@ -82,6 +82,10 @@ describe("Classify breed stage from hatching and brood dates", {
     obtained_breed_stage <- obtained[[2, "breed_stage"]]
     expect_equal(obtained_breed_stage, "brood-guard")
   })
+  it("Classify brood-guard", {
+    obtained_breed_stage <- obtained[[3, "breed_stage"]]
+    expect_equal(obtained_breed_stage, "chick-rearing")
+  })
 })
 describe("Fill metadata data columns", {
   it("Check columns", {
