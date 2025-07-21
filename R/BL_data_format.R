@@ -31,7 +31,6 @@ join_seabird_breeding_status_with_tracking_data <- function(breeding_status, tra
 }
 classify_breed_stage <- function(data) {
   data |>
-    mutate(hatching_end_date = lubridate::ymd(hatching_end_date), date_gmt = lubridate::ymd(date_gmt)) |>
     mutate(breed_stage = case_when(
       date_gmt < hatching_end_date ~ "incubation",
       date_gmt < brood_end_date & date_gmt > hatching_end_date ~ "brood-guard",
