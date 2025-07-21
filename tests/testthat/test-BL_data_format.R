@@ -75,7 +75,8 @@ describe("Classify breed stage from hatching and brood dates", {
   )
   it("Classify incubation", {
     obtained <- classify_breed_stage(data)
-    obtained_breed_stage <- obtained[[1, "breed_stage"]]
+    print(obtained)
+    obtained_breed_stage <- obtained[1, "breed_stage"]
     expect_equal(obtained_breed_stage, "incubation")
   })
 })
