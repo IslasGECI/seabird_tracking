@@ -68,9 +68,9 @@ describe("Join data columns", {
 })
 describe("Classify breed stage from hatching and brood dates", {
   data <- tibble::tibble(
-    bird_id = c("LAAL1", "LAAL1", "LAAL1"),
-    hatching_end_date = c("2017-01-17", "2017-01-17", "2017-01-17", "2017-01-17"),
-    brood_end_date = c("2017-02-13", "2017-02-13", "2017-02-13", "2017-02-13"),
+    bird_id = rep("LAAL1", 4),
+    hatching_end_date = rep("2017-01-17", 4),
+    brood_end_date = rep("2017-02-13", 4),
     date_gmt = c("2017-01-15", "2017-02-01", "2017-02-20", "2017-01-17")
   )
   obtained <- classify_breed_stage(data)
