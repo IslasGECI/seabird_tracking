@@ -22,22 +22,17 @@ describe("Construct BL table", {
     obtained_bl_table <- construct_bl_table(breeding_status_path, tracking_path, datapackage_path)
     expected_columns <- c(
       "bird_id",
-      "track_id",
-      "original_track_id",
       "sex",
-      "lat_colony",
-      "lon_colony",
+      "age",
       "breed_stage",
-      "breed_status",
+      "track_id",
       "date_gmt",
       "time_gmt",
-      "longitude",
       "latitude",
+      "longitude",
+      "original_track_id",
+      "equinox",
       "argos_quality",
-      "common_name",
-      "site_name",
-      "colony_name",
-      "device"
     )
     obtained_columns <- colnames(obtained_bl_table)
     expect_true(all(expected_columns %in% obtained_columns))
