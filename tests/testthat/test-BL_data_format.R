@@ -68,10 +68,10 @@ describe("Join data columns", {
 })
 describe("Classify breed stage from hatching and brood dates", {
   data <- tibble::tibble(
-    bird_id = rep("LAAL1", 4),
-    hatching_end_date = rep("2017-01-17", 4),
-    brood_end_date = rep("2017-02-13", 4),
-    date_gmt = c("2017-01-15", "2017-02-01", "2017-02-20", "2017-01-17")
+    bird_id = rep("LAAL1", 5),
+    hatching_end_date = rep("2017-01-17", 5),
+    brood_end_date = rep("2017-02-13", 5),
+    date_gmt = c("2017-01-15", "2017-02-01", "2017-02-20", "2017-01-17", "2017-02-13")
   )
   obtained <- classify_breed_stage(data)
   it("Classify incubation", {
@@ -89,6 +89,10 @@ describe("Classify breed stage from hatching and brood dates", {
   it("Classify limit case: date equal to hatching end date", {
     obtained_breed_stage <- obtained[[4, "breed_stage"]]
     expect_equal(obtained_breed_stage, "brood-guard")
+  })
+  it("Classify limit case: date equal to brood end date", {
+    obtained_breed_stage <- obtained[[5, "breed_stage"]]
+    expect_equal(obtained_breed_stage, "chick-rearing")
   })
 })
 describe("Fill metadata data columns", {
