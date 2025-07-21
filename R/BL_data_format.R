@@ -29,6 +29,10 @@ join_seabird_breeding_status_with_tracking_data <- function(breeding_status, tra
     rename(date_gmt = date, lat_colony = nest_lat, lon_colony = nest_lon) |>
     mutate(track_id = bird_id, original_track_id = bird_id, time_gmt = NA, argos_quality = NA)
 }
+classify_breed_stage <- function(data) {
+  data$breed_stage <- "incubation"
+  return(data)
+}
 
 get_metadata <- function(datapackage_path, resource_name = "breeding_status_albatross_guadalupe") {
   resource <- get_resource(datapackage_path, resource_name)
