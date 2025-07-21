@@ -73,10 +73,14 @@ describe("Classify breed stage from hatching and brood dates", {
     brood_end_date = c("2017-02-13", "2017-02-13", "2017-02-13"),
     date_gmt = c("2017-01-15", "2017-02-01", "2017-02-20")
   )
+  obtained <- classify_breed_stage(data)
   it("Classify incubation", {
-    obtained <- classify_breed_stage(data)
     obtained_breed_stage <- obtained[[1, "breed_stage"]]
     expect_equal(obtained_breed_stage, "incubation")
+  })
+  it("Classify brood-guard", {
+    obtained_breed_stage <- obtained[[2, "breed_stage"]]
+    expect_equal(obtained_breed_stage, "brood-guard")
   })
 })
 describe("Fill metadata data columns", {
