@@ -32,7 +32,7 @@ describe("Construct BL table", {
       "longitude",
       "original_track_id",
       "equinox",
-      "argos_quality",
+      "argos_quality"
     )
     obtained_columns <- colnames(obtained_bl_table)
     expect_true(all(expected_columns %in% obtained_columns))
