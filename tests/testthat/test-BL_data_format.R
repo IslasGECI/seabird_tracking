@@ -20,7 +20,6 @@ describe("Construct BL table", {
       "time_gmt",
       "latitude",
       "longitude",
-      "original_track_id",
       "equinox",
       "argos_quality"
     )
