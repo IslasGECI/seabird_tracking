@@ -3,8 +3,7 @@
 
 construct_bl_table <- function(breeding_status, tracking_data) {
   data_table <- join_seabird_breeding_status_with_tracking_data(breeding_status, tracking_data) |>
-    mutate(track_id = bird_id, original_track_id = bird_id, age = "adult", equinox = NA, argos_quality = NA) |>
-    rename(time_gmt = time)
+    mutate(track_id = bird_id, original_track_id = bird_id, age = "adult", equinox = NA, argos_quality = NA)
 
   ordered_columns <- c(
     "bird_id",
@@ -22,6 +21,7 @@ construct_bl_table <- function(breeding_status, tracking_data) {
   )
   data_table |>
     classify_breed_stage() |>
+    rename(time_gmt = time) |>
     select(all_of(ordered_columns))
 }
 
