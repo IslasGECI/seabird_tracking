@@ -28,8 +28,7 @@ describe("Construct BL table", {
 })
 describe("Join data columns", {
   breeding_status <- read_csv(breeding_status_path, show_col_types = FALSE)
-  tracking_data <- read_csv(tracking_path, show_col_types = FALSE) |>
-    mutate(season = lubridate::year(date))
+  tracking_data <- read_csv(tracking_path, show_col_types = FALSE)
   obtained <- join_seabird_breeding_status_with_tracking_data(breeding_status, tracking_data)
   it("Check columns", {
     expected_columns <- c(
@@ -55,6 +54,8 @@ describe("Join data columns", {
     expected_number_columns <- length(expected_columns)
     obtained_number_columns <- length(obtained_columns)
     expect_equal(obtained_number_columns, expected_number_columns)
+    expected_number_rows <- nrow(tracking_data)
+    expect_equal(nrow(obtained), expected_number_rows)
   })
   it("Check rows", {
     obtained_rows_LAAL01 <- nrow(filter(obtained, bird_id == "LAAL01"))
