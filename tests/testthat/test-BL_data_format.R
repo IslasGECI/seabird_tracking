@@ -28,7 +28,7 @@ describe("Construct BL table", {
     expect_true(all(expected_columns %in% obtained_columns))
   })
   it("Classify breed stage from joined data", {
-    expected_breed_stage <- "brood-guard"
+    expected_breed_stage <- "chick-rearing"
     obtained_breed_stage <- obtained_bl_table[[1, "breed_stage"]]
     expect_equal(obtained_breed_stage, expected_breed_stage)
   })
