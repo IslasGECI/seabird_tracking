@@ -20,6 +20,7 @@ construct_bl_table <- function(breeding_status, tracking_data) {
     "argos_quality"
   )
   data_table |>
+    classify_breed_stage() |>
     select(all_of(ordered_columns))
 }
 
