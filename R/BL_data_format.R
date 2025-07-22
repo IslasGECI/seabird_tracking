@@ -4,7 +4,7 @@
 construct_bl_table <- function(breeding_status_path, tracking_path, datapackage_path) {
   breeding_status <- read_csv(breeding_status_path, show_col_types = FALSE)
   tracking <- read_csv(tracking_path, show_col_types = FALSE) |>
-    mutate(season = lubridate::year(date), age = "adult", equinox = NA)
+    mutate(age = "adult", equinox = NA)
   data_table <- join_seabird_breeding_status_with_tracking_data(breeding_status, tracking)
   ordered_columns <- c(
     "bird_id",
