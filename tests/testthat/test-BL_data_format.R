@@ -1,9 +1,9 @@
 library(tidyverse)
 
 
-datapackage_path <- "../data/datapackage.json"
-breeding_status_path <- "../data/breeding_status_albatross_guadalupe.csv"
-tracking_path <- "../data/gps-albatros-guadalupe.csv"
+datapackage_path <- "/workdir/tests/data/datapackage.json"
+breeding_status_path <- "/workdir/tests/data/breeding_status_albatross_guadalupe.csv"
+tracking_path <- "/workdir/tests/data/gps-albatros-guadalupe.csv"
 
 describe("Construct BL table", {
   it("construct_bl_table ", {
@@ -110,7 +110,7 @@ describe("Fill metadata data columns", {
     expect_equal(obtained_metadata, expected_metadata)
   })
   it("Test read new datapackage", {
-    datapackage_path <- "../data/datapackage_pardela.json"
+    datapackage_path <- "/workdir/tests/data/datapackage_pardela.json"
     resource_name <- "breeding_status_pardela_honolulu"
     obtained <- get_metadata(datapackage_path, resource_name = resource_name)
     obtained_site_name <- obtained$site_name[[1]]
