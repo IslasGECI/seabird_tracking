@@ -46,7 +46,9 @@ describe("Join data columns", {
       "time_gmt",
       "longitude",
       "latitude",
-      "argos_quality"
+      "argos_quality",
+      "hatching_end_date",
+      "brood_end_date"
     )
     obtained_columns <- colnames(obtained)
     expect_true(all(obtained_columns %in% expected_columns))
