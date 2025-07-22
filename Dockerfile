@@ -1,7 +1,5 @@
-FROM islasgeci/base:1.0.0
+FROM islasgeci/bycatch:latest
 COPY . /workdir
 
-RUN Rscript -e "install.packages('rjson', repos='http://cran.rstudio.com')"
-RUN R -e "remotes::install_github('IslasGECI/testtools', build_vignettes=FALSE, upgrade = 'always')"
+RUN R -e "remotes::install_github('IslasGECI/bycatch_code', ref='latest', upgrade='never')"
 
-RUN make install
