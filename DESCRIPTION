@@ -10,7 +10,9 @@ Config/testthat/edition: 3
 Description: Repository to gls and gps tracking of seabirds
 Encoding: UTF-8
 Imports:
+    bycatch,
     dplyr,
+    geci.optparse,
     lubridate,
     R6,
     readr,
@@ -21,6 +23,9 @@ LazyData: true
 License: AGPL-3.0-or-later
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
+Remotes:
+    IslasGECI/optparse,
+    IslasGECI/bycatch_code
 Suggests:
     devtools,
     roxygen2,
