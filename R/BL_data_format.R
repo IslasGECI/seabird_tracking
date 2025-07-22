@@ -3,26 +3,8 @@
 
 construct_bl_table <- function(breeding_status_path, tracking_path, datapackage_path) {
   breeding_status <- read_csv(breeding_status_path, show_col_types = FALSE)
-  tracking <- read_csv(tracking_path, show_col_types = FALSE)
-  data_table <- join_seabird_breeding_status_with_tracking_data(breeding_status, tracking) |>
-    mutate(track_id = bird_id, original_track_id = bird_id, age = "adult", equinox = NA, time_gmt = NA, argos_quality = NA)
-
-  ordered_columns <- c(
-    "bird_id",
-    "sex",
-    "age",
-    "breed_stage",
-    "track_id",
-    "date_gmt",
-    "time_gmt",
-    "latitude",
-    "longitude",
-    "original_track_id",
-    "equinox",
-    "argos_quality"
-  )
-  data_table |>
-    select(all_of(ordered_columns))
+  tracking_data <- read_csv(tracking_path, show_col_types = FALSE)
+  xxconstruct_bl_table(breeding_status, tracking_data)
 }
 xxconstruct_bl_table <- function(breeding_status, tracking_data) {
   data_table <- join_seabird_breeding_status_with_tracking_data(breeding_status, tracking_data) |>
