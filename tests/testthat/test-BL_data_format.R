@@ -7,7 +7,9 @@ tracking_path <- "/workdir/tests/data/gps-albatros-guadalupe.csv"
 
 describe("Construct BL table", {
   it("construct_bl_table ", {
-    obtained_bl_table <- construct_bl_table(breeding_status_path, tracking_path, datapackage_path)
+    breeding_status <- read_csv(breeding_status_path, show_col_types = FALSE)
+    tracking_data <- read_csv(tracking_path, show_col_types = FALSE)
+    obtained_bl_table <- xxconstruct_bl_table(breeding_status, tracking_data)
     expected_columns <- c(
       "bird_id",
       "sex",
