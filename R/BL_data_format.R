@@ -1,11 +1,9 @@
 #' @import dplyr
 #' @import readr
 
-construct_bl_table <- function(breeding_status, tracking_data) {
+construct_bl_table <- function(breeding_status, tracking_data, config_content) {
   data_table <- join_seabird_breeding_status_with_tracking_data(breeding_status, tracking_data) |>
     mutate(track_id = bird_id, age = "adult", equinox = NA, argos_quality = NA)
-  colony_df <- tibble::tibble(Longitude = -118.29162, Latitude = 28.88421)
-  config_content <- list(inner_buff = 60, return_buff = 60, duration = 1, colony = colony_df)
   ordered_columns <- c(
     "bird_id",
     "sex",
