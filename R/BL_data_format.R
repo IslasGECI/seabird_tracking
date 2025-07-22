@@ -3,7 +3,8 @@
 
 construct_bl_table <- function(breeding_status, tracking_data) {
   data_table <- join_seabird_breeding_status_with_tracking_data(breeding_status, tracking_data) |>
-    mutate(track_id = bird_id, original_track_id = bird_id, age = "adult", equinox = NA, time_gmt = NA, argos_quality = NA)
+    mutate(track_id = bird_id, original_track_id = bird_id, age = "adult", equinox = NA, argos_quality = NA) |>
+    rename(time_gmt = time)
 
   ordered_columns <- c(
     "bird_id",
