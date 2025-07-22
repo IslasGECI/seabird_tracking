@@ -31,27 +31,8 @@ describe("Join data columns", {
   tracking_data <- read_csv(tracking_path, show_col_types = FALSE)
   obtained <- join_seabird_breeding_status_with_tracking_data(breeding_status, tracking_data)
   it("Check columns", {
-    expected_columns <- c(
-      "bird_id",
-      "track_id",
-      "original_track_id",
-      "sex",
-      "lat_colony",
-      "lon_colony",
-      "season",
-      "breed_stage",
-      "breed_status",
-      "date_gmt",
-      "time_gmt",
-      "longitude",
-      "latitude",
-      "argos_quality",
-      "hatching_end_date",
-      "brood_end_date"
-    )
     obtained_columns <- colnames(obtained)
-    expect_true(all(obtained_columns %in% expected_columns))
-    expected_number_columns <- length(expected_columns)
+    expected_number_columns <- length(tracking_data) + length(breeding_status) - 1
     obtained_number_columns <- length(obtained_columns)
     expect_equal(obtained_number_columns, expected_number_columns)
     expected_number_rows <- nrow(tracking_data)

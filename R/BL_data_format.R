@@ -4,8 +4,9 @@
 construct_bl_table <- function(breeding_status_path, tracking_path, datapackage_path) {
   breeding_status <- read_csv(breeding_status_path, show_col_types = FALSE)
   tracking <- read_csv(tracking_path, show_col_types = FALSE) |>
-    mutate(age = "adult", equinox = NA)
-  data_table <- join_seabird_breeding_status_with_tracking_data(breeding_status, tracking)
+    mutate(age = "adult", equinox = NA, time_gmt = NA, argos_quality = NA)
+  data_table <- join_seabird_breeding_status_with_tracking_data(breeding_status, tracking) |>
+    mutate(track_id = bird_id, original_track_id = bird_id)
   ordered_columns <- c(
     "bird_id",
     "sex",
@@ -27,8 +28,7 @@ construct_bl_table <- function(breeding_status_path, tracking_path, datapackage_
 join_seabird_breeding_status_with_tracking_data <- function(breeding_status, tracking_data) {
   tracking_data_with_season <- tracking_data |> mutate(season = lubridate::year(date))
   right_join(breeding_status, tracking_data_with_season, by = join_by("bird_id" == "name", "season" == "season")) |>
-    rename(date_gmt = date, lat_colony = nest_lat, lon_colony = nest_lon) |>
-    mutate(track_id = bird_id, original_track_id = bird_id, time_gmt = NA, argos_quality = NA)
+    rename(date_gmt = date, lat_colony = nest_lat, lon_colony = nest_lon)
 }
 classify_breed_stage <- function(data) {
   data |>
