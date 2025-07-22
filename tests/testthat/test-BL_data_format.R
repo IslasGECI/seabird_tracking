@@ -78,27 +78,6 @@ describe("Classify breed stage from hatching and brood dates", {
   })
 })
 describe("Fill metadata data columns", {
-  it("Check columns", {
-    expected_columns <- c(
-      "common_name",
-      "site_name",
-      "colony_name",
-      "device"
-    )
-    obtained_metadata <- get_metadata(datapackage_path)
-    obtained_columns <- colnames(obtained_metadata)
-    expect_equal(obtained_columns, expected_columns)
-    expected_metadata <- tibble(common_name = "Laysan albatross", site_name = "Mexico", colony_name = "Isla Guadalupe", device = "GPS")
-    expect_equal(obtained_metadata, expected_metadata)
-  })
-  it("Test read new datapackage", {
-    datapackage_path <- "/workdir/tests/data/datapackage_pardela.json"
-    resource_name <- "breeding_status_pardela_honolulu"
-    obtained <- get_metadata(datapackage_path, resource_name = resource_name)
-    obtained_site_name <- obtained$site_name[[1]]
-    expected_site_name <- "USA"
-    expect_equal(obtained_site_name, expected_site_name)
-  })
   it("Test read metadata from gps-albatross", {
     resource_name <- "gps-albatros-guadalupe"
     obtained_metadata <- get_metadata_path(datapackage_path, resource_name = resource_name)

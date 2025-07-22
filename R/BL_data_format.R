@@ -24,6 +24,27 @@ construct_bl_table <- function(breeding_status_path, tracking_path, datapackage_
   data_table |>
     select(all_of(ordered_columns))
 }
+xxconstruct_bl_table <- function(breeding_status, tracking_data) {
+  data_table <- join_seabird_breeding_status_with_tracking_data(breeding_status, tracking_data) |>
+    mutate(track_id = bird_id, original_track_id = bird_id, age = "adult", equinox = NA, time_gmt = NA, argos_quality = NA)
+
+  ordered_columns <- c(
+    "bird_id",
+    "sex",
+    "age",
+    "breed_stage",
+    "track_id",
+    "date_gmt",
+    "time_gmt",
+    "latitude",
+    "longitude",
+    "original_track_id",
+    "equinox",
+    "argos_quality"
+  )
+  data_table |>
+    select(all_of(ordered_columns))
+}
 
 join_seabird_breeding_status_with_tracking_data <- function(breeding_status, tracking_data) {
   tracking_data_with_season <- tracking_data |> mutate(season = lubridate::year(date))
@@ -39,15 +60,6 @@ classify_breed_stage <- function(data) {
     ))
 }
 
-get_metadata <- function(datapackage_path, resource_name = "breeding_status_albatross_guadalupe") {
-  resource <- get_resource(datapackage_path, resource_name)
-  tibble(
-    common_name = resource$common_name,
-    site_name = resource$site_name,
-    colony_name = resource$colony_name,
-    device = resource$device
-  )
-}
 
 get_metadata_path <- function(datapackage_path, resource_name = resource_name) {
   resource <- get_resource(datapackage_path, resource_name)
