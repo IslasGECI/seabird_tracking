@@ -32,6 +32,11 @@ describe("Construct BL table", {
     obtained_breed_stage <- obtained_bl_table[[1, "breed_stage"]]
     expect_equal(obtained_breed_stage, expected_breed_stage)
   })
+  it("Classify trips", {
+    expected_trip_id <- "4E8_01"
+    obtained_trip <- obtained_bl_table |> filter(track_id == expected_trip_id)
+    expect_equal(nrow(obtained_trip), 4)
+  })
 })
 describe("Join data columns", {
   breeding_status <- read_csv(breeding_status_path, show_col_types = FALSE)
