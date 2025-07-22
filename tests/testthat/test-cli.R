@@ -1,10 +1,6 @@
-datapackage_path <- "../data/datapackage.json"
-breeding_status_path <- "../data/breeding_status_albatross_guadalupe.csv"
-tracking_path <- "../data/gps-albatros-guadalupe.csv"
-
 describe("write_bl_table", {
   it("construct_bl_table ", {
-    relative_path <- paste0(getwd(), "/../data/")
+    relative_path <- "/workdir/tests/data"
     setwd(relative_path)
     output_path <- "bl_albatross_guadalupe.csv"
     datapackage_path <- "datapackage.json"
