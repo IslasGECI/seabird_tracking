@@ -10,7 +10,7 @@ write_bl_table <- function(options) {
 #' @export
 get_domain_specific_options <- function() {
   breeding_status_path <- geci.optparse::character_option(c("-b", "--breeding-status-path"), default = "/workdir/breeding_status.csv", help = "File path of the breeding_status_database")
-  tracking_path <- geci.optparse::character_option(c("-c", "--tracking-data-path"), default = "/workdir/gps-albatros-guadalupe.csv", help = "File path of the tracking database")
+  tracking_path <- geci.optparse::character_option(c("-t", "--tracking-data-path"), default = "/workdir/gps-albatros-guadalupe.csv", help = "File path of the tracking database")
   config_path <- geci.optparse::character_option(c("-c", "--config-path"), default = "/workdir/reports/non-tabular/config_file.json", help = "File path of the configuration")
   output_path <- geci.optparse::character_option(c("-o", "--output-path"), default = "/workdir/reports/tables/result.csv", help = "File path of the desire output")
   option_names <- c(breeding_status_path, tracking_path, config_path, output_path)
