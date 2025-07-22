@@ -13,3 +13,10 @@ describe("write_bl_table", {
     expect_true(testtools::exist_output_file(output_path))
   })
 })
+describe("get_domain_specific_options", {
+  it("Defines domain specific options", {
+    obtained_options <- get_domain_specific_options()
+    expected_options <- c("config-path", "breeding-status", "tracking-data", "output-path")
+    expect_true(all(expected_options %in% names(obtained_options)))
+  })
+})
