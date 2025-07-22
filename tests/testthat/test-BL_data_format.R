@@ -6,10 +6,10 @@ breeding_status_path <- "/workdir/tests/data/breeding_status_albatross_guadalupe
 tracking_path <- "/workdir/tests/data/gps-albatros-guadalupe.csv"
 
 describe("Construct BL table", {
+  breeding_status <- read_csv(breeding_status_path, show_col_types = FALSE)
+  tracking_data <- read_csv(tracking_path, show_col_types = FALSE)
+  obtained_bl_table <- construct_bl_table(breeding_status, tracking_data)
   it("construct_bl_table ", {
-    breeding_status <- read_csv(breeding_status_path, show_col_types = FALSE)
-    tracking_data <- read_csv(tracking_path, show_col_types = FALSE)
-    obtained_bl_table <- construct_bl_table(breeding_status, tracking_data)
     expected_columns <- c(
       "bird_id",
       "sex",
@@ -26,6 +26,11 @@ describe("Construct BL table", {
     )
     obtained_columns <- colnames(obtained_bl_table)
     expect_true(all(expected_columns %in% obtained_columns))
+  })
+  it("Classify breed stage from joined data", {
+    expected_breed_stage <- "brood-guard"
+    obtained_breed_stage <- obtained_bl_table[[1, "breed_stage"]]
+    expect_equal(obtained_breed_stage, expected_breed_stage)
   })
 })
 describe("Join data columns", {
