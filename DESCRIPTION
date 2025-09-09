@@ -1,5 +1,5 @@
 Package: seabird.tracking
-Title: Template for R projects
+Title: R project to process seabird tracking data
 Authors@R: c(
     person(given = "Ciencia de Datos",
            family = "GECI",
@@ -31,4 +31,4 @@ Suggests:
     roxygen2,
     testthat
 Type: Package
-Version: 1.0.0
+Version: 1.1.0

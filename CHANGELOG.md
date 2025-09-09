@@ -7,12 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
-- `classify_breed_stage()` use the hatching and brood end dates to classify
+
 ### Fixed
 
 ### Changed
 
 ### Removed
+
+## [1.1.0] - 2025-09-09
+### Added
+- `classify_breed_stage()` use the hatching and brood end dates to classify
+
+### Fixed
+- `join_seabird_breeding_status_with_tracking_data()` now can join between two calendar years for the same albatros nesting season.
 
 ## [1.0.0] - 2024-04-04
 
@@ -22,5 +29,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 - `clean_gps_from_txt()` deprecated. Use `clean_gps()` with `.txt` file instead.
 
-[unreleased]: https://github.com/IslasGECI/templater/compare/v1.0.0...HEAD
+[unreleased]: https://github.com/IslasGECI/templater/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/IslasGECI/templater/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/IslasGECI/templater/releases/tag/v1.0.0
