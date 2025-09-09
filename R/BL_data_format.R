@@ -27,8 +27,15 @@ construct_bl_table <- function(breeding_status, tracking_data, config_content) {
 }
 
 join_seabird_breeding_status_with_tracking_data <- function(breeding_status, tracking_data) {
-  tracking_data_with_season <- tracking_data |> mutate(season = lubridate::year(date))
-  right_join(breeding_status, tracking_data_with_season, by = join_by("bird_id" == "name", "season" == "season")) |>
+  tracking_data_with_season <- tracking_data |>
+    mutate(season = lubridate::year(date), month = lubridate::month(date)) |>
+    mutate(named_season = case_when(
+      month > 6 ~ glue::glue("{season}-{season+1}"),
+      month <= 6 ~ glue::glue("{season-1}-{season}")
+    ))
+  breeding_status_with_named_season <- breeding_status |>
+    mutate(named_season = glue::glue("{season - 1}-{season}"))
+  right_join(breeding_status_with_named_season, tracking_data_with_season, by = join_by("bird_id" == "name", "named_season" == "named_season")) |>
     rename(date_gmt = date, lat_colony = nest_lat, lon_colony = nest_lon)
 }
 classify_breed_stage <- function(data) {
