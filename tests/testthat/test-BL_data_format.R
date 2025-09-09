@@ -69,12 +69,16 @@ describe("Join data columns", {
 })
 describe("Classify breed stage from hatching and brood dates", {
   data <- tibble::tibble(
-    bird_id = rep("LAAL1", 5),
-    hatching_end_date = rep("2017-01-17", 5),
-    brood_end_date = rep("2017-02-13", 5),
-    date_gmt = c("2017-01-15", "2017-02-01", "2017-02-20", "2017-01-17", "2017-02-13")
+    bird_id = c(rep("LAAL1", 5), "LAAL10", "LAAL11"),
+    hatching_end_date = c(rep("2017-01-17", 5), "2018-01-10", NA),
+    brood_end_date = c(rep("2017-02-13", 5), NA, NA),
+    date_gmt = c("2017-01-15", "2017-02-01", "2017-02-20", "2017-01-17", "2017-02-13", "2018-01-12", "2018-02-12")
   )
   obtained <- classify_breed_stage(data)
+  it("Classify breeding fail", {
+    obtained_breeding_fail <- obtained[[6, "breed_stage"]]
+    expect_equal(obtained_breeding_fail, "breeding fail (breeding season)")
+  })
   it("Classify incubation", {
     obtained_breed_stage <- obtained[[1, "breed_stage"]]
     expect_equal(obtained_breed_stage, "incubation")
