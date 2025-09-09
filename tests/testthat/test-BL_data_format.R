@@ -78,6 +78,9 @@ describe("Classify breed stage from hatching and brood dates", {
   it("Classify breeding fail", {
     obtained_breeding_fail <- obtained[[6, "breed_stage"]]
     expect_equal(obtained_breeding_fail, "breeding fail (breeding season)")
+
+    obtained_breeding_fail <- obtained[[7, "breed_stage"]]
+    expect_equal(obtained_breeding_fail, "breeding fail (breeding season)")
   })
   it("Classify incubation", {
     obtained_breed_stage <- obtained[[1, "breed_stage"]]
