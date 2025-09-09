@@ -45,11 +45,15 @@ describe("Join data columns", {
   obtained <- join_seabird_breeding_status_with_tracking_data(breeding_status, tracking_data)
   it("Check columns", {
     obtained_columns <- colnames(obtained)
-    expected_number_columns <- length(tracking_data) + length(breeding_status) - 1
+    print(obtained_columns)
+    expected_number_columns <- length(tracking_data) + length(breeding_status) + 2
     obtained_number_columns <- length(obtained_columns)
     expect_equal(obtained_number_columns, expected_number_columns)
-	are_4E8_sex_with_na <- obtained |> filter(bird_id == "4E8") |> pull(sex) |> is.na()
-	expect_false(any(are_4E8_sex_with_na)) 
+    are_4E8_sex_with_na <- obtained |>
+      filter(bird_id == "4E8") |>
+      pull(sex) |>
+      is.na()
+    expect_false(any(are_4E8_sex_with_na))
   })
   it("Check rows", {
     obtained_rows_LAAL01 <- nrow(filter(obtained, bird_id == "LAAL01"))
