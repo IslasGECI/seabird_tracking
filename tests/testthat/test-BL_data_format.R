@@ -48,6 +48,8 @@ describe("Join data columns", {
     expected_number_columns <- length(tracking_data) + length(breeding_status) - 1
     obtained_number_columns <- length(obtained_columns)
     expect_equal(obtained_number_columns, expected_number_columns)
+    expected_column <- "named_season"
+    expect_true(expected_column %in% obtained_columns)
   })
   it("Check rows", {
     obtained_rows_LAAL01 <- nrow(filter(obtained, bird_id == "LAAL01"))
