@@ -24,11 +24,13 @@ License: AGPL-3.0-or-later
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
 Remotes:
+    IslasGECI/bycatch_code,
     IslasGECI/optparse,
-    IslasGECI/bycatch_code
+    IslasGECI/testtools,
 Suggests:
     devtools,
     roxygen2,
-    testthat
+    testthat,
+    testtools,
 Type: Package
 Version: 1.1.0
