@@ -45,7 +45,6 @@ describe("Join data columns", {
   obtained <- join_seabird_breeding_status_with_tracking_data(breeding_status, tracking_data)
   it("Check columns", {
     obtained_columns <- colnames(obtained)
-    print(obtained_columns)
     expected_number_columns <- length(tracking_data) + length(breeding_status) + 2
     obtained_number_columns <- length(obtained_columns)
     expect_equal(obtained_number_columns, expected_number_columns)
