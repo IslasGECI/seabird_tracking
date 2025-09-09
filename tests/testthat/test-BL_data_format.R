@@ -48,15 +48,15 @@ describe("Join data columns", {
     expected_number_columns <- length(tracking_data) + length(breeding_status) - 1
     obtained_number_columns <- length(obtained_columns)
     expect_equal(obtained_number_columns, expected_number_columns)
-    expected_column <- "named_season"
-    expect_true(expected_column %in% obtained_columns)
+	are_4E8_sex_with_na <- obtained |> filter(bird_id == "4E8") |> pull(sex) |> is.na()
+	expect_false(any(are_4E8_sex_with_na)) 
   })
   it("Check rows", {
     obtained_rows_LAAL01 <- nrow(filter(obtained, bird_id == "LAAL01"))
     expected_rows_LAAL01 <- 3
     expect_equal(obtained_rows_LAAL01, expected_rows_LAAL01)
     obtained_rows <- nrow(obtained)
-    expected_rows <- 33
+    expected_rows <- 37
     expect_equal(obtained_rows, expected_rows)
     obtained_rows_LAAL06 <- nrow(filter(obtained, bird_id == "LAAL06"))
     expected_rows_LAAL06 <- 0
