@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 ### Fixed
+- `classify_breed_stage()` takes into account "breeding fail" option.
 
 ### Changed
 
