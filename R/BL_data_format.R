@@ -4,6 +4,10 @@
 construct_bl_table <- function(breeding_status, tracking_data, config_content) {
   data_table <- join_seabird_breeding_status_with_tracking_data(breeding_status, tracking_data) |>
     mutate(track_id = bird_id, age = "adult", equinox = NA, argos_quality = NA)
+  data_table_with_trips <- data_table |>
+    classify_breed_stage() |>
+    bycatch::get_trips(config_content)
+
   ordered_columns <- c(
     "bird_id",
     "sex",
@@ -17,14 +21,14 @@ construct_bl_table <- function(breeding_status, tracking_data, config_content) {
     "equinox",
     "argos_quality"
   )
-  data_table_with_trips <- data_table |>
-    classify_breed_stage() |>
-    bycatch::get_trips(config_content)
-
   data_table_with_trips@data |>
     rename(time_gmt = time, latitude = Latitude, longitude = Longitude, track_id = tripID) |>
-    mutate(latitude = round(latitude, 6), longitude = round(longitude, 6)) |>
+    round_coordinates(6) |>
     select(all_of(ordered_columns))
+}
+round_coordinates <- function(data, digits = 6) {
+  data |>
+    mutate(latitude = round(latitude, digits), longitude = round(longitude, digits))
 }
 
 join_seabird_breeding_status_with_tracking_data <- function(breeding_status, tracking_data) {
