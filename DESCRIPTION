@@ -13,12 +13,13 @@ Imports:
     bycatch,
     dplyr,
     geci.optparse,
+    lifecycle,
     lubridate,
     R6,
     readr,
     rjson,
     stringr,
-    tidyverse,
+    tidyverse
 LazyData: true
 License: AGPL-3.0-or-later
 Roxygen: list(markdown = TRUE)
