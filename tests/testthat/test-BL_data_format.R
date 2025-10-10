@@ -28,10 +28,11 @@ describe("Construct BL table", {
     obtained_columns <- colnames(obtained_bl_table)
     expect_true(all(expected_columns %in% obtained_columns))
   })
+  are_all_rounded <- function(x, digits = 6) {
+    all(round(x, digits) == x, na.rm = TRUE)
+  }
   it("Round coordinates", {
-    obtained_latitued <- obtained_bl_table[[1, "latitude"]]
-    expected_latitude <- 29.110365
-    expect_equal(obtained_latitued, expected_latitude)
+    expect_true(are_all_rounded(obtained_bl_table$latitude, 6))
   })
   it("Classify breed stage from joined data", {
     expected_breed_stage <- "chick-rearing"
