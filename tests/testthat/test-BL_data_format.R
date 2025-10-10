@@ -33,6 +33,7 @@ describe("Construct BL table", {
   }
   it("Round coordinates", {
     expect_true(are_all_rounded(obtained_bl_table$latitude, 6))
+    expect_true(are_all_rounded(obtained_bl_table$longitude, 6))
   })
   it("Classify breed stage from joined data", {
     expected_breed_stage <- "chick-rearing"
