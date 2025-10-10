@@ -23,6 +23,7 @@ construct_bl_table <- function(breeding_status, tracking_data, config_content) {
 
   data_table_with_trips@data |>
     rename(time_gmt = time, latitude = Latitude, longitude = Longitude, track_id = tripID) |>
+    mutate(latitude = round(latitude, 6)) |>
     select(all_of(ordered_columns))
 }
 
