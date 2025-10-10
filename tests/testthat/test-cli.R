@@ -9,7 +9,7 @@ describe("write_bl_table", {
       "tracking-data-path" = "/workdir/tests/data/gps-albatros-guadalupe.csv",
       "output-path" = output_path
     )
-    write_bl_table(options_list)
+    write_birdlife_table(options_list)
     expect_true(testtools::exist_output_file(output_path))
   })
 })

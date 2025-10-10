@@ -1,10 +1,20 @@
 #' @export
-write_bl_table <- function(options) {
+write_birdlife_table <- function(options) {
   breeding_status <- read_csv(options[["breeding-status-path"]], show_col_types = FALSE)
   tracking_data <- read_csv(options[["tracking-data-path"]], show_col_types = FALSE)
   config_content <- read_config(options[["config-path"]])
   bl_table <- construct_bl_table(breeding_status, tracking_data, config_content)
   write_csv(bl_table, options[["output-path"]])
+}
+
+#' @export
+write_bl_table <- function(options) {
+  lifecycle::deprecate_warn(
+    when = "1.2.0",
+    what = "write_bl_table()",
+    with = "write_birdlife_table()"
+  )
+  write_birdlife_table(options)
 }
 
 #' @export
