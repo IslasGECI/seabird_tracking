@@ -17,43 +17,60 @@
 #' @examples
 #' \dontrun{
 #' options <- list(
-#'   "breeding-status-path" = "breeding_status.csv",
-#'   "tracking-data-path" = "gps-albatros-guadalupe.csv",
-#'   "config-path" = "config_file.json",
-#'   "output-path" = "result.csv"
+#'         "breeding-status-path" = "breeding_status.csv",
+#'         "tracking-data-path" = "gps-albatros-guadalupe.csv",
+#'         "config-path" = "config_file.json",
+#'         "output-path" = "result.csv"
 #' )
 #' write_birdlife_table(options)
 #' }
 write_birdlife_table <- function(options) {
-  breeding_status <- read_csv(options[["breeding-status-path"]], show_col_types = FALSE)
-  tracking_data <- read_csv(options[["tracking-data-path"]], show_col_types = FALSE)
-  config_content <- read_config(options[["config-path"]])
-  bl_table <- construct_bl_table(breeding_status, tracking_data, config_content)
-  write_csv(bl_table, options[["output-path"]])
+        breeding_status <- read_csv(options[["breeding-status-path"]], show_col_types = FALSE)
+        tracking_data <- read_csv(options[["tracking-data-path"]], show_col_types = FALSE)
+        config_content <- read_config(options[["config-path"]])
+        bl_table <- construct_bl_table(breeding_status, tracking_data, config_content)
+        write_csv(bl_table, options[["output-path"]])
 }
 
 #' @export
 write_bl_table <- function(options) {
-  lifecycle::deprecate_warn(
-    when = "1.2.0",
-    what = "write_bl_table()",
-    with = "write_birdlife_table()"
-  )
-  write_birdlife_table(options)
+        lifecycle::deprecate_warn(
+                when = "1.2.0",
+                what = "write_bl_table()",
+                with = "write_birdlife_table()"
+        )
+        write_birdlife_table(options)
 }
 
+#' Get command-line options for domain-specific input files and output
+#'
+#' Constructs a set of command-line options for specifying file paths relevant to the seabird tracking domain,
+#' including breeding status data, tracking data, configuration, and output location.
+#'
+#' @return A named list of options with file paths for:
+#'   \itemize{
+#'     \item \code{breeding-status-path}: Breeding status CSV file
+#'     \item \code{tracking-data-path}: Tracking data CSV file
+#'     \item \code{config-path}: Configuration JSON file
+#'     \item \code{output-path}: Output CSV file
+#'   }
+#' The returned options are typically used to configure file locations for downstream data processing functions.
 #' @export
+#'
+#' @examples
+#' opts <- get_domain_specific_options()
+#' opts[["breeding-status-path"]]
 get_domain_specific_options <- function() {
-  breeding_status_path <- geci.optparse::character_option(c("-b", "--breeding-status-path"), default = "/workdir/breeding_status.csv", help = "File path of the breeding_status_database")
-  tracking_path <- geci.optparse::character_option(c("-t", "--tracking-data-path"), default = "/workdir/gps-albatros-guadalupe.csv", help = "File path of the tracking database")
-  config_path <- geci.optparse::character_option(c("-c", "--config-path"), default = "/workdir/reports/non-tabular/config_file.json", help = "File path of the configuration")
-  output_path <- geci.optparse::character_option(c("-o", "--output-path"), default = "/workdir/reports/tables/result.csv", help = "File path of the desire output")
-  option_names <- c(breeding_status_path, tracking_path, config_path, output_path)
-  geci.optparse::get_options_from_vec(option_names)
+        breeding_status_path <- geci.optparse::character_option(c("-b", "--breeding-status-path"), default = "/workdir/breeding_status.csv", help = "File path of the breeding_status_database")
+        tracking_path <- geci.optparse::character_option(c("-t", "--tracking-data-path"), default = "/workdir/gps-albatros-guadalupe.csv", help = "File path of the tracking database")
+        config_path <- geci.optparse::character_option(c("-c", "--config-path"), default = "/workdir/reports/non-tabular/config_file.json", help = "File path of the configuration")
+        output_path <- geci.optparse::character_option(c("-o", "--output-path"), default = "/workdir/reports/tables/result.csv", help = "File path of the desire output")
+        option_names <- c(breeding_status_path, tracking_path, config_path, output_path)
+        geci.optparse::get_options_from_vec(option_names)
 }
 
 read_config <- function(config_path) {
-  json_content <- rjson::fromJSON(file = config_path)
-  json_content$colony <- tibble::tibble(Longitude = json_content$lon_colony, Latitude = json_content$lat_colony)
-  return(json_content)
+        json_content <- rjson::fromJSON(file = config_path)
+        json_content$colony <- tibble::tibble(Longitude = json_content$lon_colony, Latitude = json_content$lat_colony)
+        return(json_content)
 }
