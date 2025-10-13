@@ -1,4 +1,29 @@
+#' Write a CSV with the tracking data as Seabird tracking Database requires.
+#'
+#' Reads breeding status data, tracking data, and configuration data, constructs a BirdLife (BL) table,
+#' and writes the resulting table to a CSV file. All input and output paths are provided via the `options` list.
+#'
+#' @param options A named list of file paths. Must contain:
+#'   \itemize{
+#'     \item \code{breeding-status-path}: Path to the breeding status CSV file.
+#'     \item \code{tracking-data-path}: Path to the tracking data CSV file.
+#'     \item \code{config-path}: Path to the configuration JSON file.
+#'     \item \code{output-path}: Path where the output CSV will be written.
+#'   }
+#'
+#' @return Invisibly returns \code{NULL}. Called for its side effect of writing a CSV file.
 #' @export
+#'
+#' @examples
+#' \dontrun{
+#' options <- list(
+#'   "breeding-status-path" = "breeding_status.csv",
+#'   "tracking-data-path" = "gps-albatros-guadalupe.csv",
+#'   "config-path" = "config_file.json",
+#'   "output-path" = "result.csv"
+#' )
+#' write_birdlife_table(options)
+#' }
 write_birdlife_table <- function(options) {
   breeding_status <- read_csv(options[["breeding-status-path"]], show_col_types = FALSE)
   tracking_data <- read_csv(options[["tracking-data-path"]], show_col_types = FALSE)
