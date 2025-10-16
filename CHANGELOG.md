@@ -9,11 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 ### Fixed
-- `classify_breed_stage()` takes into account "breeding fail" option.
 
 ### Changed
 
 ### Removed
+
+## [1.2.0] - 2025-10-10
+### Added
+- Deprecation warning for `write_bl_table()` function.
+
+### Fixed
+- `classify_breed_stage()` takes into account "breeding fail" option.
+- `construct_bl_table()` round coordinates to 6 decimal places to avoid floating point issues.
 
 ## [1.1.0] - 2025-09-09
 ### Added
@@ -30,6 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 - `clean_gps_from_txt()` deprecated. Use `clean_gps()` with `.txt` file instead.
 
-[unreleased]: https://github.com/IslasGECI/templater/compare/v1.1.0...HEAD
+[unreleased]: https://github.com/IslasGECI/templater/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/IslasGECI/templater/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/IslasGECI/templater/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/IslasGECI/templater/releases/tag/v1.0.0

@@ -1,6 +1,6 @@
 describe("write_bl_table", {
   it("construct_bl_table ", {
-    output_path <- "/workdir/tests/data/bl_albatross_guadalupe.csv"
+    output_path <- "/workdir/tests/data/birdlife_albatross_guadalupe.csv"
     config_path <- "/workdir/tests/data/trips_config.json"
     testtools::if_exist_remove(output_path)
     options_list <- list(
@@ -9,7 +9,7 @@ describe("write_bl_table", {
       "tracking-data-path" = "/workdir/tests/data/gps-albatros-guadalupe.csv",
       "output-path" = output_path
     )
-    write_bl_table(options_list)
+    write_birdlife_table(options_list)
     expect_true(testtools::exist_output_file(output_path))
   })
 })

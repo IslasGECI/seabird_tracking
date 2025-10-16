@@ -1,5 +1,30 @@
+#' Write a CSV with the tracking data as Seabird tracking Database requires.
+#'
+#' Reads breeding status data, tracking data, and configuration data, constructs a BirdLife (BL) table,
+#' and writes the resulting table to a CSV file. All input and output paths are provided via the `options` list.
+#'
+#' @param options A named list of file paths. Must contain:
+#'   \itemize{
+#'     \item \code{breeding-status-path}: Path to the breeding status CSV file.
+#'     \item \code{tracking-data-path}: Path to the tracking data CSV file.
+#'     \item \code{config-path}: Path to the configuration JSON file.
+#'     \item \code{output-path}: Path where the output CSV will be written.
+#'   }
+#'
+#' @return Invisibly returns \code{NULL}. Called for its side effect of writing a CSV file.
 #' @export
-write_bl_table <- function(options) {
+#'
+#' @examples
+#' \dontrun{
+#' options <- list(
+#'   "breeding-status-path" = "breeding_status.csv",
+#'   "tracking-data-path" = "gps-albatros-guadalupe.csv",
+#'   "config-path" = "config_file.json",
+#'   "output-path" = "result.csv"
+#' )
+#' write_birdlife_table(options)
+#' }
+write_birdlife_table <- function(options) {
   breeding_status <- read_csv(options[["breeding-status-path"]], show_col_types = FALSE)
   tracking_data <- read_csv(options[["tracking-data-path"]], show_col_types = FALSE)
   config_content <- read_config(options[["config-path"]])
@@ -8,6 +33,33 @@ write_bl_table <- function(options) {
 }
 
 #' @export
+write_bl_table <- function(options) {
+  lifecycle::deprecate_warn(
+    when = "1.2.0",
+    what = "write_bl_table()",
+    with = "write_birdlife_table()"
+  )
+  write_birdlife_table(options)
+}
+
+#' Get command-line options for domain-specific input files and output
+#'
+#' Constructs a set of command-line options for specifying file paths relevant to the seabird tracking domain,
+#' including breeding status data, tracking data, configuration, and output location.
+#'
+#' @return A named list of options with file paths for:
+#'   \itemize{
+#'     \item \code{breeding-status-path}: Breeding status CSV file
+#'     \item \code{tracking-data-path}: Tracking data CSV file
+#'     \item \code{config-path}: Configuration JSON file
+#'     \item \code{output-path}: Output CSV file
+#'   }
+#' The returned options are typically used to configure file locations for downstream data processing functions.
+#' @export
+#'
+#' @examples
+#' opts <- get_domain_specific_options()
+#' opts[["breeding-status-path"]]
 get_domain_specific_options <- function() {
   breeding_status_path <- geci.optparse::character_option(c("-b", "--breeding-status-path"), default = "/workdir/breeding_status.csv", help = "File path of the breeding_status_database")
   tracking_path <- geci.optparse::character_option(c("-t", "--tracking-data-path"), default = "/workdir/gps-albatros-guadalupe.csv", help = "File path of the tracking database")

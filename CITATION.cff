@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the following metadata."
+title: "seabird_tracking"
+type: software
+authors:
+  - family-names: "Olvera-Guerrero"
+    given-names: "Guillermo"
+    github: "MemoOlv"
+    orcid: "https://orcid.org/0000-0002-6900-5315"
+  - family-names: "Rojas-Mayoral"
+    given-names: Evaristo
+    orcid: "https://orcid.org/0000-0001-6812-9562"
+    github: devarops
+  - family-names: "Villasante-Barahona"
+    given-names: "Mario"
+    orcid: "https://orcid.org/0009-0001-7867-8570"
+    github: "mvillasante"
+repository-code: "https://github.com/IslasGECI/seabird_tracking"
+keywords:
+  - ecology
+  - R
+  - seabird
+  - tracking
+license: "agpl-3.0-only"
