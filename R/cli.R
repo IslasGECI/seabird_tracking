@@ -61,12 +61,12 @@ write_bl_table <- function(options) {
 #' opts <- get_domain_specific_options()
 #' opts[["breeding-status-path"]]
 get_domain_specific_options <- function() {
-  breeding_status_path <- geci.optparse::character_option(c("-b", "--breeding-status-path"), default = "/workdir/breeding_status.csv", help = "File path of the breeding_status_database")
-  tracking_path <- geci.optparse::character_option(c("-t", "--tracking-data-path"), default = "/workdir/gps-albatros-guadalupe.csv", help = "File path of the tracking database")
-  config_path <- geci.optparse::character_option(c("-c", "--config-path"), default = "/workdir/reports/non-tabular/config_file.json", help = "File path of the configuration")
-  output_path <- geci.optparse::character_option(c("-o", "--output-path"), default = "/workdir/reports/tables/result.csv", help = "File path of the desire output")
+  breeding_status_path <- gecioptparse::character_option(c("-b", "--breeding-status-path"), default = "/workdir/breeding_status.csv", help = "File path of the breeding_status_database")
+  tracking_path <- gecioptparse::character_option(c("-t", "--tracking-data-path"), default = "/workdir/gps-albatros-guadalupe.csv", help = "File path of the tracking database")
+  config_path <- gecioptparse::character_option(c("-c", "--config-path"), default = "/workdir/reports/non-tabular/config_file.json", help = "File path of the configuration")
+  output_path <- gecioptparse::character_option(c("-o", "--output-path"), default = "/workdir/reports/tables/result.csv", help = "File path of the desire output")
   option_names <- c(breeding_status_path, tracking_path, config_path, output_path)
-  geci.optparse::get_options_from_vec(option_names)
+  gecioptparse::get_options_from_vec(option_names)
 }
 
 read_config <- function(config_path) {
