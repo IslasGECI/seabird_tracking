@@ -26,7 +26,7 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
 Remotes:
     IslasGECI/bycatch_code,
-    IslasGECI/geci_optparse,
+    IslasGECI/gecioptparse,
     IslasGECI/testtools,
 Suggests:
     devtools,
