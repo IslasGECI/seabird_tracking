@@ -32,9 +32,9 @@ format:
       -e "style_dir('tests')" \
       -e "style_dir('tests/testthat')"
 
-init: setup init_github tests
+init: setup init_git tests
 
-init_github:
+init_git:
 	git config --global --add safe.directory /workdir
 	git config --global user.name "Ciencia de Datos • GECI"
 	git config --global user.email "ciencia.datos@islas.org.mx"
@@ -43,10 +43,10 @@ init_github:
 setup: clean install
 
 install:
-	R -e "devtools::document()" && \
+	R -e "devtools::install()" && \
 	R -e "devtools::check(error_on = 'error')" && \
 	R -e "devtools::build()" && \
-	R -e "devtools::install()"
+	R -e "devtools::document()"
 
 tests:
 	Rscript -e "devtools::test(stop_on_failure = TRUE)"
