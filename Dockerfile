@@ -1,7 +1,8 @@
-FROM islasgeci/bycatch:latest
-RUN rm --force --recursive /workdir/*
+FROM rocker/tidyverse:latest
+WORKDIR /workdir
+
 COPY . /workdir
 
-RUN R -e "remotes::install_github('IslasGECI/bycatch_code', ref='latest', upgrade='never')"
+RUN R -e "pak::pkg_install('IslasGECI/bycatch_code@latest')"
 
 RUN make install
