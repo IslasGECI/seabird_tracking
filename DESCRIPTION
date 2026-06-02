@@ -13,17 +13,17 @@ Imports:
     bycatch,
     dplyr,
     gecioptparse,
+    glue,
     lifecycle,
     lubridate,
-    R6,
     readr,
     rjson,
     stringr,
-    tidyverse
+    testtools,
+    tibble,
 LazyData: true
 License: AGPL-3.0-or-later
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.1
 Remotes:
     IslasGECI/bycatch_code,
     IslasGECI/gecioptparse,
@@ -35,3 +35,4 @@ Suggests:
     testtools,
 Type: Package
 Version: 1.2.0
+Config/roxygen2/version: 8.0.0
