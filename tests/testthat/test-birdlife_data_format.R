@@ -4,10 +4,10 @@ library(tidyverse)
 datapackage_path <- "/workdir/tests/data/datapackage.json"
 breeding_status_path <- "/workdir/tests/data/breeding_status_albatross_guadalupe.csv"
 trips_path <- "/workdir/tests/data/computed_trips.csv"
+computed_trips <- read_csv(trips_path, col_types = cols(ID = col_character()), show_col_types = FALSE)
 
 describe("Construct BL table", {
   breeding_status <- read_csv(breeding_status_path, show_col_types = FALSE)
-  computed_trips <- read_csv(trips_path, show_col_types = FALSE, col_types = cols(ID = col_character()))
   colony_df <- tibble::tibble(Longitude = -118.29162, Latitude = 28.88421)
   config_content <- list(inner_buff = 60, return_buff = 60, duration = 1, colony = colony_df)
   obtained_bl_table <- xxconstruct_bl_table(breeding_status, computed_trips, config_content)
@@ -48,10 +48,7 @@ describe("Construct BL table", {
 })
 describe("Join data columns", {
   breeding_status <- read_csv(breeding_status_path, show_col_types = FALSE)
-  computed_trips_path <- "/workdir/tests/data/computed_trips.csv"
-  computed_trips <- read_csv(computed_trips_path, col_types = cols(ID = col_character()), show_col_types = FALSE)
   obtained <- join_seabird_breeding_status_with_tracking_data(breeding_status, computed_trips)
-  print(obtained)
   it("Check columns", {
     obtained_columns <- colnames(obtained)
     expected_number_columns <- length(computed_trips) + length(breeding_status) + 2
