@@ -54,5 +54,7 @@ describe("Assign coordinates to radar signal data", {
     obtained <- fill_tracking_data_with_dates_on_radar_signal(radar_signal, tracking_data)
     expected_rows <- 4
     expect_equal(nrow(obtained), expected_rows)
+    expected_ids <- c(rep("4E8", 3), "4H2")
+    expect_equal(obtained$name, expected_ids)
   })
 })
