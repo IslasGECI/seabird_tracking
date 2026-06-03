@@ -48,11 +48,13 @@ describe("Construct BL table", {
 })
 describe("Join data columns", {
   breeding_status <- read_csv(breeding_status_path, show_col_types = FALSE)
-  tracking_data <- read_csv(tracking_path, show_col_types = FALSE)
-  obtained <- join_seabird_breeding_status_with_tracking_data(breeding_status, tracking_data)
+  computed_trips_path <- "/workdir/tests/data/computed_trips.csv"
+  computed_trips <- read_csv(computed_trips_path, col_types = cols(ID = col_character()), show_col_types = FALSE)
+  obtained <- join_seabird_breeding_status_with_tracking_data(breeding_status, computed_trips)
+  print(obtained)
   it("Check columns", {
     obtained_columns <- colnames(obtained)
-    expected_number_columns <- length(tracking_data) + length(breeding_status) + 2
+    expected_number_columns <- length(computed_trips) + length(breeding_status) + 2
     obtained_number_columns <- length(obtained_columns)
     expect_equal(obtained_number_columns, expected_number_columns)
     are_4E8_sex_with_na <- obtained |>
@@ -62,11 +64,11 @@ describe("Join data columns", {
     expect_false(any(are_4E8_sex_with_na))
   })
   it("Check rows", {
-    obtained_rows_LAAL01 <- nrow(filter(obtained, bird_id == "LAAL01"))
-    expected_rows_LAAL01 <- 3
-    expect_equal(obtained_rows_LAAL01, expected_rows_LAAL01)
+    obtained_rows_id_1 <- nrow(filter(obtained, bird_id == "1"))
+    expected_rows_id_1 <- 2
+    expect_equal(obtained_rows_id_1, expected_rows_id_1)
     obtained_rows <- nrow(obtained)
-    expected_rows <- 37
+    expected_rows <- 17
     expect_equal(obtained_rows, expected_rows)
     obtained_rows_LAAL06 <- nrow(filter(obtained, bird_id == "LAAL06"))
     expected_rows_LAAL06 <- 0

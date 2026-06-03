@@ -2,11 +2,11 @@
 #' @import readr
 
 construct_bl_table <- function(breeding_status, tracking_data, config_content) {
-  data_table <- join_seabird_breeding_status_with_tracking_data(breeding_status, tracking_data) |>
-    mutate(track_id = bird_id, age = "adult", equinox = NA, argos_quality = NA)
+  computed_trips <- bycatch::compute_trips(tracking_data, config_content)
+  data_table <- join_seabird_breeding_status_with_tracking_data(breeding_status, computed_trips@data) |>
+    mutate(age = "adult", equinox = NA, argos_quality = NA)
   data_table_with_trips <- data_table |>
-    classify_breed_stage() |>
-    bycatch::get_trips(config_content)
+    classify_breed_stage()
 
   ordered_columns <- c(
     "bird_id",
@@ -21,8 +21,9 @@ construct_bl_table <- function(breeding_status, tracking_data, config_content) {
     "equinox",
     "argos_quality"
   )
-  data_table_with_trips@data |>
-    rename(time_gmt = time, latitude = Latitude, longitude = Longitude, track_id = tripID) |>
+  data_table_with_trips |>
+    rename(time_gmt = time, latitude = Latitude, longitude = Longitude) |>
+    mutate(track_id = tripID) |>
     round_coordinates(6) |>
     select(all_of(ordered_columns))
 }
@@ -40,7 +41,7 @@ join_seabird_breeding_status_with_tracking_data <- function(breeding_status, tra
     ))
   breeding_status_with_named_season <- breeding_status |>
     mutate(named_season = glue::glue("{season - 1}-{season}"))
-  right_join(breeding_status_with_named_season, tracking_data_with_season, by = join_by("bird_id" == "name", "named_season" == "named_season")) |>
+  right_join(breeding_status_with_named_season, tracking_data_with_season, by = join_by("bird_id" == "ID", "named_season" == "named_season")) |>
     rename(date_gmt = date, lat_colony = nest_lat, lon_colony = nest_lon)
 }
 classify_breed_stage <- function(data) {
