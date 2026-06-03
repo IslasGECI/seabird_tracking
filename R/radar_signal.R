@@ -6,11 +6,9 @@ assign_coordinates_to_radar_signal <- function(radar_signal, tracking_data) {
 }
 
 fill_tracking_data_with_dates_on_radar_signal <- function(radar_signal, tracking_data) {
-  tracking_data_with_datetime <- tracking_data |>
-    dplyr::mutate(datetime = lubridate::ymd_hms(paste0(date, " ", time)))
+  tracking_data_with_datetime <- add_datetime_column(tracking_data)
 
-  radar_signal_with_datetime <- radar_signal |>
-    dplyr::mutate(datetime = lubridate::ymd_hms(paste0(date, " ", time)))
+  radar_signal_with_datetime <- add_datetime_column(radar_signal)
 
   tracking_data_range_by_id <- tracking_data_with_datetime |>
     dplyr::group_by(name) |>
@@ -22,4 +20,8 @@ fill_tracking_data_with_dates_on_radar_signal <- function(radar_signal, tracking
     dplyr::transmute(name = bird_id, date, time, latitude = NA_real_, longitude = NA_real_)
 
   dplyr::bind_rows(tracking_data, filtered_radar_signal)
+}
+add_datetime_column <- function(data) {
+  data_with_datetime <- data |>
+    dplyr::mutate(datetime = lubridate::ymd_hms(paste0(date, " ", time)))
 }
