@@ -8,7 +8,7 @@ describe("Assign coordinates to radar signal data", {
       longitude = c(30, 40, 100)
     )
     radar_signal <- tibble::tibble(
-      bird_id = c("4E8","1K0"),
+      bird_id = c("4E8", "1K0"),
       date = as.Date(c("2020-01-01", "2020-01-01")),
       time = c("12:00:00", "12:00:00"),
       radar_signal = c(3, 5)
@@ -19,7 +19,7 @@ describe("Assign coordinates to radar signal data", {
     expect_true(all(expected_columns %in% obtained_columns))
     expected_ids <- c("4E8")
     expect_equal(obtained$name, expected_ids)
-  }),
+  })
   it("with match on id and date time", {
     tracking_data <- tibble::tibble(
       name = c("4E8", "4E8", "4H2"),
