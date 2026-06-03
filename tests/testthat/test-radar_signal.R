@@ -17,5 +17,6 @@ describe("Assign coordinates to radar signal data", {
     expected_columns <- c("name", "date", "time", "radar_signal", "latitude", "longitude")
     obtained_columns <- colnames(obtained)
     expect_true(all(expected_columns %in% obtained_columns))
+    expect_equal(nrows(obtained), 1)
   })
 })
