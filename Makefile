@@ -50,7 +50,8 @@ install:
 
 tests:
 	Rscript -e "devtools::test(stop_on_failure = TRUE)"
-
+test_file:
+	Rscript -e "devtools::test_active_file('${file}', stop_on_failure = TRUE)"
 red: format
 	Rscript -e "devtools::test(stop_on_failure = TRUE)" \
 	&& git  restore tests/testthat/*.R \
