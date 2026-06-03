@@ -3,6 +3,7 @@ WORKDIR /workdir
 
 COPY . /workdir
 
-RUN R -e "pak::pkg_install('IslasGECI/bycatch_code@latest')"
+RUN Rscript -e "pak::pkg_install('IslasGECI/bycatch_code@latest')"
+RUN Rscript -e "install.packages(c('covr', 'DT', 'htmltools', 'styler'), repos='http://cran.rstudio.com')"
 
 RUN make install
