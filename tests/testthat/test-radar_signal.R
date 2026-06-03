@@ -1,11 +1,11 @@
 describe("Assign coordinates to radar signal data", {
   it("with match on id and date time", {
     tracking_data <- tibble::tibble(
-      name = c("4E8", "4E8"),
-      date = as.Date(c("2020-01-01", "2020-01-02")),
-      time = c("12:00:00", "12:00:00"),
-      latitude = c(10, 20),
-      longitude = c(30, 40)
+      name = c("4E8", "4E8", "4H2"),
+      date = as.Date(c("2020-01-01", "2020-01-02", "2020-01-01")),
+      time = c("12:00:00", "12:00:00", "12:00:00"),
+      latitude = c(10, 20, 15),
+      longitude = c(30, 40, 100)
     )
     radar_signal <- tibble::tibble(
       bird_id = "4E8",
