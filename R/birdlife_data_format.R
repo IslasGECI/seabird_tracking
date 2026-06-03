@@ -1,12 +1,6 @@
 #' @import dplyr
 #' @import readr
 
-construct_bl_table <- function(breeding_status, tracking_data, config_content) {
-  computed_trips <- bycatch::compute_trips(tracking_data, config_content)@data
-  xxconstruct_bl_table(breeding_status, computed_trips, config_content)
-}
-
-
 xxconstruct_bl_table <- function(breeding_status, computed_trips, config_content) {
   data_table <- join_seabird_breeding_status_with_tracking_data(breeding_status, computed_trips) |>
     mutate(age = "adult", equinox = NA, argos_quality = NA)
