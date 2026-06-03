@@ -59,15 +59,15 @@ describe("Assign coordinates to radar signal data", {
   })
   it("Interpolate coordinates for filled tracking data by ID", {
     filled_tracking_data <- tibble::tibble(
-      name = c("4E8", "4E8", "4E8"),
-      date = as.Date(c("2020-01-01", "2020-01-02", "2020-01-03")),
-      time = c("12:00:00", "00:00:00", "12:00:00"),
-      latitude = c(10, NA, 20),
-      longitude = c(30, NA, 40)
+      name = c("4E8", "4E8", "4E8", "4H2", "4H2"),
+      date = as.Date(c("2020-01-01", "2020-01-02", "2020-01-03", "2020-01-02", "2020-01-03")),
+      time = c("12:00:00", "00:00:00", "12:00:00", "00:00:00", "12:00:00"),
+      latitude = c(10, NA, 20, 50, 60),
+      longitude = c(30, NA, 40, 100, 110)
     )
     obtained <- interpolate_coordinates_for_filled_tracking_data(filled_tracking_data)
-    expected_latitude <- c(10, 12.5, 20)
-    expected_longitude <- c(30, 32.5, 40)
+    expected_latitude <- c(10, 12.5, 20, 50, 60)
+    expected_longitude <- c(30, 32.5, 40, 100, 110)
     expect_equal(obtained$latitude, expected_latitude)
     expect_equal(obtained$longitude, expected_longitude)
   })
