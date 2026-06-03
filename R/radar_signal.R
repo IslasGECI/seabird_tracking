@@ -10,9 +10,7 @@ fill_tracking_data_with_dates_on_radar_signal <- function(radar_signal, tracking
 
   radar_signal_with_datetime <- add_datetime_column(radar_signal)
 
-  tracking_data_range_by_id <- tracking_data_with_datetime |>
-    dplyr::group_by(name) |>
-    dplyr::summarize(min_datetime = min(datetime), max_datetime = max(datetime))
+  tracking_data_range_by_id <- compute_tracking_data_range(tracking_data_with_datetime)
 
   filtered_radar_signal <- filter_radar_signal_within_tracking_data_range(radar_signal_with_datetime, tracking_data_range_by_id)
   dplyr::bind_rows(tracking_data, filtered_radar_signal)
@@ -26,4 +24,9 @@ filter_radar_signal_within_tracking_data_range <- function(radar_signal_with_dat
     dplyr::inner_join(tracking_data_range_by_id, by = dplyr::join_by(bird_id == name)) |>
     dplyr::filter(datetime >= min_datetime & datetime <= max_datetime) |>
     dplyr::transmute(name = bird_id, date, time, latitude = NA_real_, longitude = NA_real_)
+}
+compute_tracking_data_range <- function(tracking_data_with_datetime) {
+  tracking_data_with_datetime |>
+    dplyr::group_by(name) |>
+    dplyr::summarize(min_datetime = min(datetime), max_datetime = max(datetime))
 }
