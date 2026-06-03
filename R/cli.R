@@ -30,7 +30,7 @@ write_birdlife_table <- function(options) {
   config_content <- read_config(options[["config-path"]])
 
   computed_trips <- bycatch::compute_trips(tracking_data, config_content)@data
-  bl_table <- xxconstruct_bl_table(breeding_status, computed_trips, config_content)
+  bl_table <- construct_bl_table(breeding_status, computed_trips, config_content)
 
   write_csv(bl_table, options[["output-path"]])
 }

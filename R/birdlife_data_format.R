@@ -1,7 +1,7 @@
 #' @import dplyr
 #' @import readr
 
-xxconstruct_bl_table <- function(breeding_status, computed_trips, config_content) {
+construct_bl_table <- function(breeding_status, computed_trips, config_content) {
   data_table <- join_seabird_breeding_status_with_tracking_data(breeding_status, computed_trips) |>
     mutate(age = "adult", equinox = NA, argos_quality = NA)
   data_table_with_trips <- data_table |>
