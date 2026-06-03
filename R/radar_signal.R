@@ -10,7 +10,8 @@ fill_tracking_data_with_dates_on_radar_signal <- function(radar_signal, tracking
   radar_signal_with_datetime <- add_datetime_column(radar_signal)
 
   filtered_radar_signal <- filter_radar_signal_within_tracking_data_range(radar_signal_with_datetime, tracking_data_with_datetime)
-  dplyr::bind_rows(tracking_data, filtered_radar_signal)
+  dplyr::bind_rows(tracking_data, filtered_radar_signal) |>
+    dplyr::arrange(name, date, time)
 }
 add_datetime_column <- function(data) {
   data_with_datetime <- data |>
