@@ -46,10 +46,10 @@ describe("Assign coordinates to radar signal data", {
       longitude = c(30, 40, 100)
     )
     radar_signal <- tibble::tibble(
-      bird_id = "4E8",
-      date = as.Date("2020-01-01"),
-      time = "15:00:00",
-      radar_signal = 3
+      bird_id = c("4E8", "4H2"),
+      date = as.Date(c("2020-01-01", "2020-01-02")),
+      time = c("15:00:00", "12:00:00"),
+      radar_signal = c(3, 10)
     )
     obtained <- fill_tracking_data_with_dates_on_radar_signal(radar_signal, tracking_data)
     expected_rows <- 4
