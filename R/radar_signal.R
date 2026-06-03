@@ -32,6 +32,8 @@ compute_tracking_data_range <- function(tracking_data_with_datetime) {
 
 interpolate_coordinates_for_filled_tracking_data <- function(filled_tracking_data) {
   filled_tracking_data |>
+    group_by(name) |>
     add_datetime_column() |>
-    dplyr::mutate(longitude = approx(datetime, longitude, xout = datetime, rule = 2)$y, latitude = approx(datetime, latitude, xout = datetime, rule = 2)$y)
+    dplyr::mutate(longitude = approx(datetime, longitude, xout = datetime, rule = 2)$y, latitude = approx(datetime, latitude, xout = datetime, rule = 2)$y) |>
+    dplyr::ungroup()
 }
