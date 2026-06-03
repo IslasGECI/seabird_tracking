@@ -3,14 +3,14 @@ library(tidyverse)
 
 datapackage_path <- "/workdir/tests/data/datapackage.json"
 breeding_status_path <- "/workdir/tests/data/breeding_status_albatross_guadalupe.csv"
-tracking_path <- "/workdir/tests/data/gps-albatros-guadalupe.csv"
+trips_path <- "/workdir/tests/data/computed_trips.csv"
 
 describe("Construct BL table", {
   breeding_status <- read_csv(breeding_status_path, show_col_types = FALSE)
-  tracking_data <- read_csv(tracking_path, show_col_types = FALSE)
+  computed_trips <- read_csv(trips_path, show_col_types = FALSE, col_types = cols(ID = col_character()))
   colony_df <- tibble::tibble(Longitude = -118.29162, Latitude = 28.88421)
   config_content <- list(inner_buff = 60, return_buff = 60, duration = 1, colony = colony_df)
-  obtained_bl_table <- construct_bl_table(breeding_status, tracking_data, config_content)
+  obtained_bl_table <- xxconstruct_bl_table(breeding_status, computed_trips, config_content)
   it("construct_bl_table ", {
     expected_columns <- c(
       "bird_id",
