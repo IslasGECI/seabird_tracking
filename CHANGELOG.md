@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 ### Changed
+- `construct_bl_table()` now uses `bycatch::compute_trips()` instead of `bycatch::get_trips()` for trip computation (trip computation externalized).
+- `join_seabird_breeding_status_with_tracking_data()` join key changed from `"name"` to `"ID"` for matching bird IDs.
+- `construct_bl_table()` now derives `track_id` from computed trips (`tripID`) instead of assigning `bird_id`.
 
 ### Removed
 
