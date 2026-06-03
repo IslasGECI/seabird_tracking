@@ -2,8 +2,13 @@
 #' @import readr
 
 construct_bl_table <- function(breeding_status, tracking_data, config_content) {
-  computed_trips <- bycatch::compute_trips(tracking_data, config_content)
-  data_table <- join_seabird_breeding_status_with_tracking_data(breeding_status, computed_trips@data) |>
+  computed_trips <- bycatch::compute_trips(tracking_data, config_content)@data
+  xxconstruct_bl_table(breeding_status, computed_trips, config_content)
+}
+
+
+xxconstruct_bl_table <- function(breeding_status, computed_trips, config_content) {
+  data_table <- join_seabird_breeding_status_with_tracking_data(breeding_status, computed_trips) |>
     mutate(age = "adult", equinox = NA, argos_quality = NA)
   data_table_with_trips <- data_table |>
     classify_breed_stage()
@@ -27,6 +32,7 @@ construct_bl_table <- function(breeding_status, tracking_data, config_content) {
     round_coordinates(6) |>
     select(all_of(ordered_columns))
 }
+
 round_coordinates <- function(data, digits = 6) {
   data |>
     mutate(latitude = round(latitude, digits), longitude = round(longitude, digits))
