@@ -1,5 +1,5 @@
 describe("write_bl_table", {
-  it("construct_bl_table ", {
+  it("construct_birdlife_table ", {
     output_path <- "/workdir/tests/data/birdlife_albatross_guadalupe.csv"
     config_path <- "/workdir/tests/data/trips_config.json"
     testtools::if_exist_remove(output_path)

@@ -10,8 +10,8 @@ describe("Construct BL table", {
   breeding_status <- read_csv(breeding_status_path, show_col_types = FALSE)
   colony_df <- tibble::tibble(Longitude = -118.29162, Latitude = 28.88421)
   config_content <- list(inner_buff = 60, return_buff = 60, duration = 1, colony = colony_df)
-  obtained_bl_table <- construct_bl_table(breeding_status, computed_trips, config_content)
-  it("construct_bl_table ", {
+  obtained_bl_table <- construct_birdlife_table(breeding_status, computed_trips, config_content)
+  it("construct_birdlife_table ", {
     expected_columns <- c(
       "bird_id",
       "sex",
