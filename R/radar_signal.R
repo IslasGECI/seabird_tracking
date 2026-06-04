@@ -1,3 +1,8 @@
+compute_radar_signal_database <- function(tracking_data, radar_signal) {
+  filled_tracking_data <- fill_tracking_data_with_dates_on_radar_signal(radar_signal, tracking_data)
+  interpolated_tracking_data <- interpolate_coordinates_for_filled_tracking_data(filled_tracking_data)
+  assign_coordinates_to_radar_signal(radar_signal, interpolated_tracking_data)
+}
 assign_coordinates_to_radar_signal <- function(radar_signal, tracking_data) {
   radar_signal_with_coordinates <- radar_signal |>
     dplyr::left_join(tracking_data, by = dplyr::join_by(bird_id == name, date, time)) |>
@@ -11,6 +16,7 @@ fill_tracking_data_with_dates_on_radar_signal <- function(radar_signal, tracking
 
   filtered_radar_signal <- filter_radar_signal_within_tracking_data_range(radar_signal_with_datetime, tracking_data_with_datetime)
   dplyr::bind_rows(tracking_data, filtered_radar_signal) |>
+    dplyr::distinct(name, date, time, .keep_all = TRUE) |>
     dplyr::arrange(name, date, time)
 }
 add_datetime_column <- function(data) {
@@ -32,7 +38,7 @@ compute_tracking_data_range <- function(tracking_data_with_datetime) {
 
 interpolate_coordinates_for_filled_tracking_data <- function(filled_tracking_data) {
   filled_tracking_data |>
-    group_by(name) |>
+    dplyr::group_by(name) |>
     add_datetime_column() |>
     interpolate_coordinates() |>
     dplyr::ungroup()
