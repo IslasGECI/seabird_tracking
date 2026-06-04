@@ -68,7 +68,8 @@ get_domain_specific_options <- function() {
   tracking_path <- gecioptparse::character_option(c("-t", "--tracking-data-path"), default = "/workdir/gps-albatros-guadalupe.csv", help = "File path of the tracking database")
   config_path <- gecioptparse::character_option(c("-c", "--config-path"), default = "/workdir/reports/non-tabular/config_file.json", help = "File path of the configuration")
   output_path <- gecioptparse::character_option(c("-o", "--output-path"), default = "/workdir/reports/tables/result.csv", help = "File path of the desire output")
-  option_names <- c(breeding_status_path, tracking_path, config_path, output_path)
+  radar_signal_path <- gecioptparse::character_option(c("-r", "--radar-signal-path"), default = "/workdir/radar_signal.csv", help = "File path of the radar signal database")
+  option_names <- c(breeding_status_path, tracking_path, config_path, output_path, radar_signal_path)
   gecioptparse::get_options_from_vec(option_names)
 }
 
