@@ -16,7 +16,7 @@ describe("write_birdlife_table", {
 describe("get_domain_specific_options", {
   it("Defines domain specific options", {
     obtained_options <- get_domain_specific_options()
-    expected_options <- c("config-path", "breeding-status-path", "tracking-data-path", "output-path")
+    expected_options <- c("config-path", "breeding-status-path", "tracking-data-path", "output-path", "radar-signal-path")
     expect_true(all(expected_options %in% names(obtained_options)))
   })
 })
