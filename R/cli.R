@@ -1,3 +1,13 @@
+write_radar_signal_coordinates <- function(options) {
+  tracking_data <- readr::read_csv(options[["tracking-data-path"]], show_col_types = FALSE)
+  radar_signal_data <- readr::read_csv(options[["radar-signal-path"]], show_col_types = FALSE)
+
+  radar_signal_with_coordinates <- compute_radar_signal_database(tracking_data, radar_signal_data)
+
+  readr::write_csv(radar_signal_with_coordinates, options[["output-path"]])
+}
+
+
 #' Write a CSV with the tracking data as Seabird tracking Database requires.
 #'
 #' Reads breeding status data, tracking data, and configuration data, constructs a BirdLife (BL) table,
