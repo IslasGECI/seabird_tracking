@@ -1,6 +1,5 @@
 describe("Assign coordinates to radar signal data", {
   it("Compute radar signal database", {
-    skip("Test skipped because the function is not fully implemented yet")
     tracking_data <- tibble::tibble(
       name = c("4E8", "4E8", "4H2", "4H2"),
       date = as.Date(c("2020-01-01", "2020-01-02", "2020-01-01", "2020-01-02")),
@@ -74,7 +73,6 @@ describe("Assign coordinates to radar signal data", {
       radar_signal = c(3, 5, 10)
     )
     obtained <- fill_tracking_data_with_dates_on_radar_signal(radar_signal, tracking_data)
-    print(obtained)
     expected_rows <- 4
     expect_equal(nrow(obtained), expected_rows)
     expected_ids <- c(rep("4E8", 3), "4H2")
