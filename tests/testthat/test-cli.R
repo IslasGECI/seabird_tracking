@@ -13,6 +13,19 @@ describe("write_birdlife_table", {
     expect_true(testtools::exist_output_file(output_path))
   })
 })
+describe("write radar signal coordinates taken from gps data", {
+  it("write_radar_signal_coordinates ", {
+    output_path <- "/workdir/tests/data/radar_signal_with_coordinates.csv"
+    testtools::if_exist_remove(output_path)
+    options_list <- list(
+      "tracking-data-path" = "/workdir/tests/data/gps-albatros-guadalupe.csv",
+      "radar-signal-path" = "/workdir/tests/data/radar_signal.csv",
+      "output-path" = output_path
+    )
+    write_radar_signal_coordinates(options_list)
+    expect_true(testtools::exist_output_file(output_path))
+  })
+})
 describe("get_domain_specific_options", {
   it("Defines domain specific options", {
     obtained_options <- get_domain_specific_options()
