@@ -6,16 +6,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
 ### Added
 
 ### Fixed
 
 ### Changed
+
+### Removed
+
+## [1.3.0] - 2026-06-04
+
+### Added
+- `write_radar_signal_coordinates()` reads tracking and radar signal CSV files, computes coordinate enrichment, and writes the result to a CSV.
+
+### Changed
 - `construct_bl_table()` now uses `bycatch::compute_trips()` instead of `bycatch::get_trips()` for trip computation (trip computation externalized).
 - `join_seabird_breeding_status_with_tracking_data()` join key changed from `"name"` to `"ID"` for matching bird IDs.
 - `construct_bl_table()` now derives `track_id` from computed trips (`tripID`) instead of assigning `bird_id`.
-
-### Removed
 
 ## [1.2.0] - 2025-10-10
 ### Added
