@@ -1,3 +1,28 @@
+#' Write a CSV with radar signal coordinates as tracking data requires.
+#'
+#' Reads tracking data and radar signal data from CSV files, computes coordinate
+#' enrichment via \code{compute_radar_signal_database()}, and writes the resulting
+#' table to a CSV file. All input and output paths are provided via the \code{options} list.
+#'
+#' @param options A named list of file paths. Must contain:
+#'   \itemize{
+#'     \item \code{tracking-data-path}: Path to the tracking data CSV file.
+#'     \item \code{radar-signal-path}: Path to the radar signal CSV file.
+#'     \item \code{output-path}: Path where the output CSV will be written.
+#'   }
+#'
+#' @return Invisibly returns \code{NULL}. Called for its side effect of writing a CSV file.
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' options <- list(
+#'   "tracking-data-path" = "tracking_data.csv",
+#'   "radar-signal-path" = "radar_signal.csv",
+#'   "output-path" = "result.csv"
+#' )
+#' write_radar_signal_coordinates(options)
+#' }
 write_radar_signal_coordinates <- function(options) {
   tracking_data <- readr::read_csv(options[["tracking-data-path"]], show_col_types = FALSE)
   radar_signal_data <- readr::read_csv(options[["radar-signal-path"]], show_col_types = FALSE)
