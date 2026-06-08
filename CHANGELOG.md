@@ -15,6 +15,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [1.3.1] - 2026-06-08
+
+### Fixed
+- `write_radar_signal_coordinates()` now filters noise from the radar signal. The noise threshold is set to 5, as specified by the GPS manufacturer.
+
 ## [1.3.0] - 2026-06-04
 
 ### Added
