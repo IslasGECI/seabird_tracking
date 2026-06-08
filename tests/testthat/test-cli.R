@@ -23,6 +23,9 @@ describe("write radar signal coordinates taken from gps data", {
       "output-path" = output_path
     )
     write_radar_signal_coordinates(options_list)
+    obtained <- readr::read_csv(output_path, show_col_types = FALSE)
+    expected_rows <- 7
+    expect_equal(nrow(obtained), expected_rows)
     expect_true(testtools::exist_output_file(output_path))
   })
 })
