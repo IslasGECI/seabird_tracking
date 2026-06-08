@@ -27,7 +27,9 @@ write_radar_signal_coordinates <- function(options) {
   tracking_data <- readr::read_csv(options[["tracking-data-path"]], show_col_types = FALSE)
   radar_signal_data <- readr::read_csv(options[["radar-signal-path"]], show_col_types = FALSE)
 
-  radar_signal_with_coordinates <- compute_radar_signal_database(tracking_data, radar_signal_data)
+  noise_threshold <- 5
+  radar_signal_with_coordinates <- compute_radar_signal_database(tracking_data, radar_signal_data) |>
+    dplyr::filter(radar_signal > noise_threshold)
 
   readr::write_csv(radar_signal_with_coordinates, options[["output-path"]])
 }
