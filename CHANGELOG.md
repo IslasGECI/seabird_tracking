@@ -15,6 +15,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [1.3.2] - 2026-08-12
+
+### Fixed
+- Change breeding status classification label from "breeding fail (breeding season)" to "fail (breeding season)" following seabird tracking database specification.
+
 ## [1.3.1] - 2026-06-08
 
 ### Fixed
