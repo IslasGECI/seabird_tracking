@@ -18,6 +18,4 @@
 |---|---|
 | `write_radar_signal_coordinates(options)` | Reads tracking and radar signal CSVs, enriches radar signals with interpolated GPS coordinates via `compute_radar_signal_database()`, filters by noise threshold, and writes output CSV. |
 | `write_birdlife_table(options)` | Reads breeding status, tracking data, and a JSON config, computes trips via `bycatch::compute_trips()`, constructs a BirdLife-format table, and writes output CSV. |
-| `get_domain_specific_options()` | Builds a named list of CLI options (via `gecioptparse`) for specifying file paths: breeding status, tracking data, config JSON, output, and radar signal. |
-| `read_config(config_path)` | Reads a JSON config file and converts colony coordinates into a tibble with `Longitude`/`Latitude` columns. |
 | `clean_gps(raw_path, bird_id)` | Extracts GPS points from raw `.txt` or `.csv` files and writes a cleaned CSV with bird ID. |
