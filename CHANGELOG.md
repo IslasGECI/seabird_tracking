@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [1.3.3] - 2026-08-26
+### Fixed
+- CLI command `write_birdlife_table` now removes artificial floating points from the coordinates. 
+
 ## [1.3.2] - 2026-08-12
 
 ### Fixed
