@@ -29,7 +29,9 @@ describe("Construct BL table", {
     expect_true(all(expected_columns %in% obtained_columns))
   })
   are_all_rounded <- function(x, digits = 6) {
-    all(round(x, digits) == x, na.rm = TRUE)
+    expect_true(is.character(x))
+    decimals <- stringr::str_extract(x, "(?<=\\.)\\d+$")
+    all(nchar(decimals) <= digits)
   }
   it("Round coordinates", {
     expect_true(are_all_rounded(obtained_bl_table$latitude, 6))
