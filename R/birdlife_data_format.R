@@ -29,7 +29,10 @@ construct_birdlife_table <- function(breeding_status, computed_trips, config_con
 
 round_coordinates <- function(data, digits = 6) {
   data |>
-    mutate(latitude = round(latitude, digits), longitude = round(longitude, digits))
+    mutate(
+      latitude = as.character(round(latitude, digits)),
+      longitude = as.character(round(longitude, digits))
+    )
 }
 
 join_seabird_breeding_status_with_tracking_data <- function(breeding_status, tracking_data) {
