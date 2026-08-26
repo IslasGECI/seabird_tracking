@@ -7,7 +7,7 @@ Authors@R: c(
            email = "ciencia.datos@islas.org.mx"
            ))
 Config/testthat/edition: 3
-Description: Repository to gls and gps tracking of seabirds
+Description: Tools for processing seabird tracking data (GPS and GLS). Provides pipelines for enriching radar signal data with interpolated GPS coordinates, generating BirdLife-format tracking tables from breeding status and trip data, and extracting/cleaning raw GPS points from CSV and TXT files.
 Encoding: UTF-8
 Imports:
     bycatch,
