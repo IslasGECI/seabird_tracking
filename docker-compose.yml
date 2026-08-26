@@ -7,3 +7,11 @@ services:
     command: bash
     volumes:
       - $PWD:/workdir
+  develop:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    image: islasgeci/clean_camera_data_develop:latest
+    command: bash
+    volumes:
+      - $PWD:/workdir
